@@ -1,0 +1,3 @@
+[submodule "src/libft"]
+	path = src/libft
+	url = ssh://git@github.com/LostHeron/libft
