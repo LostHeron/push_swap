@@ -1,0 +1,5 @@
+*.d
+*.o
+*.json
+push_swap
+*.out

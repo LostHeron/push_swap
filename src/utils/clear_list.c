@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   clear_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 10:45:56 by jweber            #+#    #+#             */
-/*   Updated: 2025/01/29 10:48:22 by jweber           ###   ########.fr       */
+/*   Created: 2025/01/30 15:43:26 by jweber            #+#    #+#             */
+/*   Updated: 2025/01/30 15:52:10 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include <stdlib.h>
+#include "push_swap.h"
 
-typedef	struct s_stack
+void	*clear_list(t_stack *a)
 {
-	int	*list;
-	int	size;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}			t_stack;
+	int		i;
+	t_node	*tmp1;
+	t_node	*tmp2;
 
-#endif
+	tmp1 = a.head;
+	i = 0;
+	while (i < (*a).size)
+	{
+		tmp2 = tmp1.next;
+		free(tmp1);
+		tmp1 = tmp2;	
+		i++;
+	}
+	(*a).head = NULL;
+	(*a).size = 0;
+	return (NULL);
+}
