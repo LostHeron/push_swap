@@ -54,7 +54,7 @@ int	parse_input(t_stack *pa, int nb_args, char **args)
 				free(tmp);
 				return (1);
 			}
-			ft_dc_stack_add(pa, node_tmp);
+			ft_dc_stack_add_back(pa, node_tmp);
 			val_i++;
 		}
 		arg_i++;

@@ -15,6 +15,7 @@
 #include "io.h"
 #include "parsing.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 static void	my_print(void *a);
 static void	*my_free(void *content);
