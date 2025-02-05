@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "io.h"
 #include "lists_double_circular.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 int	pb(t_stack *pa, t_stack *pb)
 {
@@ -22,5 +22,6 @@ int	pb(t_stack *pa, t_stack *pb)
 	if (tmp == NULL)
 		return (1);
 	ft_dc_stack_add(pb, tmp);
+	ft_printf_fd(1, "pb\n");
 	return (0);
 }

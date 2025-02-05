@@ -6,13 +6,15 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:23:01 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/05 14:28:29 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/05 17:01:51 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
+#include "io.h"
 
 void	r(t_stack *a)
 {
 	a->head = a->head->next;
+	ft_printf_fd(1, "r%s\n", a->name);
 }

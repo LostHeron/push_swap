@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
+#include "io.h"
 
 void	s(t_stack *a)
 {
@@ -23,4 +24,5 @@ void	s(t_stack *a)
 	tmp = *((int *)head->content);
 	*((int *)head->content) = *((int *)next->content);
 	*((int *)next->content) = tmp;
+	ft_printf_fd(1, "s%s\n", a->name);
 }

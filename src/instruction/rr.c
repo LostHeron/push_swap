@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
+#include "io.h"
 
 void	rr(t_stack *a)
 {
 	a->head = a->head->prev;
+	ft_printf_fd(1, "rr%s\n", a->name);
 }
