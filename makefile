@@ -23,7 +23,7 @@ INSTRUCTION_FILES :=  pa.c \
 
 SORTING_DIR := src/sorting_algorithm/
 SORTING_FILES := sort_stack.c \
-				 quick_sort.c \
+				 bubble_sort.c \
 
 
 FILES_INCLUDES := includes/

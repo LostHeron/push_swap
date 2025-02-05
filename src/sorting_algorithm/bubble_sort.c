@@ -15,7 +15,7 @@
 
 static int	get_min_index(t_stack a);
 
-void	quick_sort(t_stack *paa, t_stack *pbb)
+void	bubble_sort(t_stack *paa, t_stack *pbb)
 {
 	int		i;
 	int		j;

@@ -15,7 +15,7 @@
 
 #include "lists_double_circular.h"
 
-void	quick_sort(t_stack *pa, t_stack *pb);
-int	sort_stack(t_stack *a, t_stack *b);
+void	bubble_sort(t_stack *pa, t_stack *pb);
+int		sort_stack(t_stack *a, t_stack *b);
 
 #endif

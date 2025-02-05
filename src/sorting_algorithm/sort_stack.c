@@ -15,6 +15,6 @@
 
 int	sort_stack(t_stack *a, t_stack *b)
 {
-	quick_sort(a, b);
+	bubble_sort(a, b);
 	return (0);
 }
