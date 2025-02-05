@@ -10,10 +10,20 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_FILES)
 PARSING_DIR := src/parsing/
 PARSING_FILES := ft_atoi_err.c \
 				parsing.c \
+				
+INSTRUCTION_DIR := src/instruction/
+INSTRUCTION_FILES :=  pa.c \
+					  pb.c \
+					  r.c \
+					  rr.c \
+					  s.c \
+
 
 FILES_INCLUDES := includes/
 C_FILES := $(NAME).c \
-		   $(addprefix $(PARSING_DIR), $(PARSING_FILES))
+		   $(addprefix $(PARSING_DIR), $(PARSING_FILES)) \
+		   $(addprefix $(INSTRUCTION_DIR), $(INSTRUCTION_FILES)) \
+
 
 OBJ_DIR := .obj/
 OBJ_FILES := $(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
@@ -34,10 +44,13 @@ $(NAME): $(OBJ_FILES) $(LIBFT)
 
 -include $(DEP_FILES)
 
-$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)$(PARSING_DIR)
+$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)$(PARSING_DIR) $(OBJ_DIR)$(INSTRUCTION_DIR)
 	$(CC) $(CFLAGS) -MMD -MP -c -I $(FILES_INCLUDES) -I $(LIBFT_INCLUDES) $< -o $@
 
 $(OBJ_DIR)$(PARSING_DIR):
+	mkdir -p $@
+
+$(OBJ_DIR)$(INSTRUCTION_DIR):
 	mkdir -p $@
 
 clean:
