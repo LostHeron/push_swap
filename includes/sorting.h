@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   sorting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 15:52:35 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/05 15:17:00 by jweber           ###   ########.fr       */
+/*   Created: 2025/02/05 16:36:13 by jweber            #+#    #+#             */
+/*   Updated: 2025/02/05 16:40:47 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef SORTING_H
+# define SORTING_H
 
-# include "lists_double_circular.h"
+#include "lists_double_circular.h"
 
-int	ft_atoi_err(int *b, char *nptr);
-int	parse_input(t_stack *pa, int nb_args, char **args);
+void	quick_sort(t_stack *pa, t_stack *pb);
+int	sort_stack(t_stack *a, t_stack *b);
 
 #endif

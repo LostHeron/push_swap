@@ -1,15 +1,18 @@
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra 
+CFLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = src/libft/
 LIBFT_FILES = libft.a
 LIBFT_INCLUDES = $(LIBFT_DIR)includes/
 LIBFT = $(LIBFT_DIR)$(LIBFT_FILES)
 
+PRINT_DIR := src/printing/
+PRINT_FILES := print_stacks.c \
+
 PARSING_DIR := src/parsing/
 PARSING_FILES := ft_atoi_err.c \
-				parsing.c \
+				 parsing.c \
 				
 INSTRUCTION_DIR := src/instruction/
 INSTRUCTION_FILES :=  pa.c \
@@ -18,12 +21,17 @@ INSTRUCTION_FILES :=  pa.c \
 					  rr.c \
 					  s.c \
 
+SORTING_DIR := src/sorting_algorithm/
+SORTING_FILES := sort_stack.c \
+				 quick_sort.c \
+
 
 FILES_INCLUDES := includes/
 C_FILES := $(NAME).c \
+		   $(addprefix $(PRINT_DIR), $(PRINT_FILES)) \
 		   $(addprefix $(PARSING_DIR), $(PARSING_FILES)) \
 		   $(addprefix $(INSTRUCTION_DIR), $(INSTRUCTION_FILES)) \
-
+		   $(addprefix $(SORTING_DIR), $(SORTING_FILES)) \
 
 OBJ_DIR := .obj/
 OBJ_FILES := $(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
@@ -44,13 +52,19 @@ $(NAME): $(OBJ_FILES) $(LIBFT)
 
 -include $(DEP_FILES)
 
-$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)$(PARSING_DIR) $(OBJ_DIR)$(INSTRUCTION_DIR)
+$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)$(PRINT_DIR) $(OBJ_DIR)$(PARSING_DIR) $(OBJ_DIR)$(INSTRUCTION_DIR) $(OBJ_DIR)$(SORTING_DIR)
 	$(CC) $(CFLAGS) -MMD -MP -c -I $(FILES_INCLUDES) -I $(LIBFT_INCLUDES) $< -o $@
 
 $(OBJ_DIR)$(PARSING_DIR):
 	mkdir -p $@
 
 $(OBJ_DIR)$(INSTRUCTION_DIR):
+	mkdir -p $@
+
+$(OBJ_DIR)$(PRINT_DIR):
+	mkdir -p $@
+
+$(OBJ_DIR)$(SORTING_DIR):
 	mkdir -p $@
 
 clean:
