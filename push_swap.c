@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 	}
 	if (parse_input(&a, argc - 1, argv + 1) != 0)
 	{
+		ft_dc_stack_clear(&a, &my_free);
 		ft_printf_fd(1, "Error\n");
 		return (1);
 	}

@@ -21,7 +21,9 @@ int	ft_atoi_err(int *b, char *nptr)
 
 	i = 0;
 	sign = 1;
-	if (nptr[i] == '\0' && nptr[i] != '+' && nptr[i] != '-' &&  !(nptr[i] <= '0' && nptr[i] <= '9'))
+	*b = 0;
+	if (nptr[i] == '\0' && nptr[i] != '+' && nptr[i] != '-'
+		&& !(nptr[i] <= '0' && nptr[i] <= '9'))
 		return (1);
 	if (nptr[i] == '+' || nptr[i] == '-')
 		if (nptr[i++] == '-')
