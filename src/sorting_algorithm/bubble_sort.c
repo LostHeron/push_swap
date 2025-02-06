@@ -1,67 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
+/*   bubble_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 16:04:21 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/05 16:43:47 by jweber           ###   ########.fr       */
+/*   Created: 2025/02/06 16:32:49 by jweber            #+#    #+#             */
+/*   Updated: 2025/02/06 17:05:15 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
 #include "instruction.h"
 
-static int	get_min_index(t_stack a);
-
-void	bubble_sort(t_stack *paa, t_stack *pbb)
+void	bubble_sort(t_stack *a)
 {
 	int		i;
 	int		j;
-	int		nb_elems;
-	int		min_index;
+	int		rotation;
 
 	i = 0;
-	nb_elems = paa->size;
-	while (i < nb_elems)
+	rotation = 0;
+	while (i < a->size)
 	{
-		min_index = get_min_index(*paa);
 		j = 0;
-		while (j < min_index)
+		while (j < a->size - 1)
 		{
-			r(paa);
+			if (*((int *)a->head->content) > *((int *)a->head->next->content))
+			{
+				rotation = 1;
+				s(a);
+			}
+			r(a);
 			j++;
 		}
-		pb(paa, pbb);
+		r(a);
+		if (rotation == 0)
+			break ;
 		i++;
 	}
-	i = 0;
-	while (i < nb_elems)
-	{
-		pa(paa, pbb);
-		i++;
-	}
-}
-
-static int	get_min_index(t_stack a)
-{
-	int	i;
-	int	min;
-	int	min_index;
-
-	i = 0;
-	min = *((int *)(a.head->content));
-	min_index = 0;
-	while (i < a.size)
-	{
-		if (*((int *)a.head->content) < min)
-		{
-			min = *((int *)a.head->content);
-			min_index = i;
-		}
-		i++;
-		a.head = a.head->next;
-	}
-	return (min_index);
 }

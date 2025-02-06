@@ -5,3 +5,5 @@ push_swap
 *.out
 TODO
 push_swap_visualizer/
+*.log
+log
