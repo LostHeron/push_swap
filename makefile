@@ -15,16 +15,18 @@ PARSING_FILES := ft_atoi_err.c \
 				 parsing.c \
 				
 INSTRUCTION_DIR := src/instruction/
-INSTRUCTION_FILES :=  pa.c \
-					  pb.c \
-					  r.c \
-					  rr.c \
-					  s.c \
+INSTRUCTION_FILES :=  inst_pa.c \
+					  inst_pb.c \
+					  inst_r.c \
+					  inst_rr.c \
+					  inst_s.c \
 
 SORTING_DIR := src/sorting_algorithm/
 SORTING_FILES := sort_stack.c \
 				 selection_sort.c \
 				 bubble_sort.c \
+				 insertion_sort.c \
+				 merge_sort.c \
 
 
 FILES_INCLUDES := includes/

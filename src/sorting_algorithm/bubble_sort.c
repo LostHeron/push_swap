@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:32:49 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/06 17:05:15 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/06 18:13:24 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	bubble_sort(t_stack *a)
 			if (*((int *)a->head->content) > *((int *)a->head->next->content))
 			{
 				rotation = 1;
-				s(a);
+				inst_s(a);
 			}
-			r(a);
+			inst_r(a);
 			j++;
 		}
-		r(a);
+		inst_r(a);
 		if (rotation == 0)
 			break ;
 		i++;

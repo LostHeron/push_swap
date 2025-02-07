@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
+/*   selection_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:04:21 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/05 16:43:47 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/06 18:18:16 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	get_min_index(t_stack a);
 
-void	selection_sort(t_stack *paa, t_stack *pbb)
+void	selection_sort(t_stack *a, t_stack *b)
 {
 	int		i;
 	int		j;
@@ -23,23 +23,23 @@ void	selection_sort(t_stack *paa, t_stack *pbb)
 	int		min_index;
 
 	i = 0;
-	nb_elems = paa->size;
+	nb_elems = a->size;
 	while (i < nb_elems)
 	{
-		min_index = get_min_index(*paa);
+		min_index = get_min_index(*a);
 		j = 0;
 		while (j < min_index)
 		{
-			r(paa);
+			inst_r(a);
 			j++;
 		}
-		pb(paa, pbb);
+		inst_pb(a, b);
 		i++;
 	}
 	i = 0;
 	while (i < nb_elems)
 	{
-		pa(paa, pbb);
+		inst_pa(a, b);
 		i++;
 	}
 }
