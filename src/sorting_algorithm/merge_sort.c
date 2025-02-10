@@ -6,21 +6,22 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:35:37 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/07 20:22:29 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/10 18:09:01 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
 #include "instruction.h"
 #include "io.h"
+#include "printing.h"
 
 void	merge_sort_rec(t_stack *a, t_stack *b, int *c_pos, int start, int end, int nb_elems);
 void	merge_sort_sort(t_stack *a, t_stack *b, int *c_pos, int start, int middle, int nb_elems, int end);
 void	pushing_back(t_stack *a, t_stack *b, int start, int end);
 int get_val1(t_stack b, int c_pos);
 int get_val2(t_stack b, int c_pos, int middle, int start);
-void	pa_at_middle(t_stack *b, int *c_pos, int start, int middle);
-void	pa_at_start(t_stack *b, int *c_pos);
+void	pa_at_middle(t_stack *a, t_stack *b, int *c_pos, int middle, int start);
+void	pa_at_start(t_stack *a, t_stack *b, int *c_pos);
 
 void	merge_sort(t_stack *a, t_stack *b)
 {
@@ -53,26 +54,16 @@ void	merge_sort_sort(t_stack *a, t_stack *b, int *c_pos, int start, int middle, 
 {
 	int	counter;
 	int	counter_cpos;
+
 	(void) middle;
 	(void) counter_cpos;
-	// l'idee, il faut push dans b de start à middle,
-	// donc faut que c_pos soit à start, si c_pos n'est pas à start,
-	// r(a) et c_pos++, until c_pos == start
-	// puis b(b) et counter ++ et ça jusque ce que start + counter == end
-	// puis dans pb, mettre l'algo pour modif l'ordre dans lequel on push
-	//
-	// Mais en premier go faire les 3 operation et juste pa back
-	ft_printf_fd(1, "on rentre ici avec : \n");
-	ft_printf_fd(1, "start = %i\n", start);
-	ft_printf_fd(1, "end = %i\n", end);
-	ft_printf_fd(1, "middle = %i\n", middle);
 	counter_cpos=0;
 	while (*c_pos % (nb_elems) != start)
 	{
-		ft_printf_fd(1, "*c_pos = %i\n", *c_pos);
 		inst_r(a);
 		(*c_pos)++;	
 	}
+	//print_stacks(*a, *b);
 	counter = 0;
 	while (start + counter < end)
 	{
@@ -86,9 +77,9 @@ void	merge_sort_sort(t_stack *a, t_stack *b, int *c_pos, int start, int middle, 
 		//counter--;
 		counter--;
 	}
-	inst_rr(b);
-	pushing_back(a, b, start, end);
 	*/
+	//inst_rr(b);
+	pushing_back(a, b, start, end);
 }
 
 void	pushing_back(t_stack *a, t_stack *b, int start, int end)
@@ -99,53 +90,50 @@ void	pushing_back(t_stack *a, t_stack *b, int start, int end)
 	int		val1;
 	int		val2;
 	int		nb_elems;
-	int		nb_pushed;
-	int		nb_pushed_left;
 
 	c_pos = 0;
 	i = 0;
 	nb_elems = end - start;
-	middle = (start + end) / 2;
-	nb_pushed_left = 0;
+	if ((end + start) % 2 == 1)
+		middle = (start + end) / 2 + 1;
+	else
+		middle = (start + end) / 2;
 	while (i < nb_elems)
 	{
-		nb_pushed = nb_elems - b->size;
-		end = end - nb_pushed;
-		middle = middle - nb_pushed_left;
-		val1 = get_val1(*b, c_pos);
-		val2 = get_val2(*b, c_pos, middle, start);
-		if (end < middle )
+		c_pos = c_pos % b->size;
+		if (b->size == 1)
 		{
-			// go to c_pos = 0 et pa(a, b);
+			inst_pa(a, b);
+		}
+		else if (end <= middle)
+		{
 			pa_at_start(a, b, &c_pos);
-			nb_pushed++;
+			middle--;
 		}
 		else if (middle <= start)
+			pa_at_middle(a, b, &c_pos, middle, start);
+		else 
 		{
-			// go to c_pos = start - middle et pb;
-			pa_at_middle(a, b, &c_pos, start, middle);
-			nb_pushed_left++;
-			nb_pushed++;
+			val1 = get_val1(*b, c_pos);
+			val2 = get_val2(*b, c_pos, middle, start);
+			if (val1 > val2)
+			{
+				pa_at_start(a, b, &c_pos);
+				middle--;
+			}
+			else
+				pa_at_middle(a, b, &c_pos, middle, start);
 		}
+		end--;
+		i++;
 	}
-	/*
-	if (val1 > val2)
-	{
-		inst_pa(a, b);
-	}
-	else
-	{
-		//bouger en rr(a);
-		//puis pa();
-	}
-	*/
 }
 
 int get_val1(t_stack b, int c_pos)
 {
-	while (c_pos != 0)
+	while (c_pos % b.size != 0)
 	{
-		b.head = b.head->next;
+		b.head = b.head->prev;
 		c_pos--;
 	}
 	return (*((int *)b.head->content));
@@ -156,25 +144,27 @@ int get_val2(t_stack b, int c_pos, int middle, int start)
 	while (c_pos % b.size != middle - start)
 	{
 		b.head = b.head->next;
-		c_pos--;
+		c_pos++;
 	}
 	return (*((int *)b.head->content));
 }
 
-void	pa_at_start(t_stack *b, int *c_pos)
+void	pa_at_start(t_stack *a, t_stack *b, int *c_pos)
 {
-	while (*c_pos != 0)
+	while (*c_pos % b->size != 0)
 	{
-		inst_r(b);
+		inst_rr(b);
 		(*c_pos)--;
 	}
+	inst_pa(a, b);
 }
 
-void	pa_at_middle(t_stack *b, int *c_pos, int start, int middle)
+void	pa_at_middle(t_stack *a, t_stack *b, int *c_pos, int middle, int start)
 {
 	while (*c_pos % b->size != middle - start)
 	{
-		inst_rr(b);
+		inst_r(b);
 		(*c_pos)++;
 	}
+	inst_pa(a, b);
 }

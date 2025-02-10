@@ -12,9 +12,12 @@
 
 #include "lists_double_circular.h"
 #include "io.h"
+#include <stdlib.h>
 
 void	inst_r(t_stack *a)
 {
+	if (a->head == NULL)
+		return ;
 	a->head = a->head->next;
 	ft_printf_fd(1, "r%s\n", a->name);
 }

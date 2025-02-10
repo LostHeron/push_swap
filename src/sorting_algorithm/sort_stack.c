@@ -21,7 +21,7 @@ int	sort_stack(t_stack *a, t_stack *b)
 	i = 0;
 	if (i == 0)
 	{
-		printf("dans selection sort\n");
+		printf("dans merge sort\n");
 		//insertion_sort(a);
 		merge_sort(a, b);
 	}
