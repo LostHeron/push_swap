@@ -16,5 +16,6 @@
 # include "lists_double_circular.h"
 
 void	print_stacks(t_stack a, t_stack b);
+void	print_stacks_index(t_stack a, t_stack b);
 
 #endif

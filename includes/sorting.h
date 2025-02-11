@@ -20,5 +20,6 @@ void	insertion_sort(t_stack *a);
 void	bubble_sort(t_stack *a);
 int		sort_stack(t_stack *a, t_stack *b);
 void	merge_sort(t_stack **stack_array);
+int		radix_sort(t_stack *a, t_stack *b);
 
 #endif

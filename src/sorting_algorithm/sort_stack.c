@@ -19,7 +19,7 @@ int	sort_stack(t_stack *a, t_stack *b)
 	int		i;
 	t_stack	*stack_arr[2];
 
-	i = 1;
+	i = 2;
 	if (i == 0)
 	{
 		ft_printf_fd(1, "dans merge sort\n");
@@ -31,6 +31,11 @@ int	sort_stack(t_stack *a, t_stack *b)
 	{
 		ft_printf_fd(1, "dans bubble_sort\n");
 		bubble_sort(a);
+	}
+	else if (i == 2)
+	{
+		ft_printf_fd(1, "dans radix_sort\n");
+		radix_sort(a, b);
 	}
 	else
 	{
