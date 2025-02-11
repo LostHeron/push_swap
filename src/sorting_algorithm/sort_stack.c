@@ -16,14 +16,16 @@
 
 int	sort_stack(t_stack *a, t_stack *b)
 {
-	int	i;
+	int		i;
+	t_stack	*stack_arr[2];
 
 	i = 0;
 	if (i == 0)
 	{
 		printf("dans merge sort\n");
-		//insertion_sort(a);
-		merge_sort(a, b);
+		stack_arr[0] = a;
+		stack_arr[1] = b;
+		merge_sort(stack_arr);
 	}
 	else
 	{

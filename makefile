@@ -27,6 +27,7 @@ SORTING_FILES := sort_stack.c \
 				 bubble_sort.c \
 				 insertion_sort.c \
 				 merge_sort.c \
+				 merge_sort_utils.c \
 
 
 FILES_INCLUDES := includes/
