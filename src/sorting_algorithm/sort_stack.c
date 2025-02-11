@@ -29,7 +29,7 @@ int	sort_stack(t_stack *a, t_stack *b)
 	}
 	else
 	{
-		printf("dans insertion sort\n");
+		printf("dans selection sort\n");
 		selection_sort(a, b);
 	}
 	return (0);

@@ -6,14 +6,14 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:22:16 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/04 16:05:23 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/11 11:19:56 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
 #include "parsing.h"
 #include "standard.h"
-#include <stdio.h>
+#include "io.h"
 #define WHITE_SPACES " \t\n\v\f\r"
 
 static int	add_values_stack(t_stack *pa, char **values);
@@ -29,7 +29,7 @@ int	parse_input(t_stack *pa, int nb_args, char **args)
 	while (arg_i < nb_args)
 	{
 		values = ft_split(args[arg_i], WHITE_SPACES);
-		if (values == NULL)
+		if (values == NULL || values[0] == NULL)
 			return (1);
 		if (add_values_stack(pa, values) != 0)
 		{
