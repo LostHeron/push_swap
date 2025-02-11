@@ -16,6 +16,6 @@
 # include "lists_double_circular.h"
 
 int	ft_atoi_err(int *b, char *nptr);
-int	parse_input(t_stack *pa, int nb_args, char **args);
+int	parse_input(t_stack *pa, int nb_args, char **args, char **p_option);
 
 #endif

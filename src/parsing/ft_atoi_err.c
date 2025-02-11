@@ -25,7 +25,7 @@ int	ft_atoi_err(int *b, char *nptr)
 	*b = 0;
 	if (nptr[i] == '\0' || (nptr[i] != '+' && nptr[i] != '-'
 			&& !('0' <= nptr[i] && nptr[i] <= '9')))
-		return (1);
+		return (-1);
 	if (nptr[i] == '+' || nptr[i] == '-')
 		if (nptr[i++] == '-')
 			sign = -1;
@@ -33,12 +33,14 @@ int	ft_atoi_err(int *b, char *nptr)
 	while ('0' <= nptr[i] && nptr[i] <= '9')
 	{
 		if (calc_next_b(b, sign, nptr[i]) == 1)
-			return (1);
+			return (-1);
 		i++;
 		nb_digits++;
 	}
-	if (nptr[i] != '\0' || nb_digits == 0)
-		return (1);
+	if (nptr[0] == '-' && nptr[1] == 't' && nptr[2] == '\0')
+		return (2);
+	else if (nptr[i] != '\0' || nb_digits == 0)
+		return (-1);
 	else
 		return (0);
 }

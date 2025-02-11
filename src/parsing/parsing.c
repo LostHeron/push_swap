@@ -13,16 +13,16 @@
 #include "lists_double_circular.h"
 #include "parsing.h"
 #include "standard.h"
-#include "io.h"
 #define WHITE_SPACES " \t\n\v\f\r"
 
 static int	add_values_stack(t_stack *pa, char **values);
 static int	check_duplicate(t_stack *pa);
 static void	*free_all(char **values);
 
-int	parse_input(t_stack *pa, int nb_args, char **args)
+int	parse_input(t_stack *pa, int nb_args, char **args, char **p_option)
 {
 	int		arg_i;
+	int		err_code;
 	char	**values;
 
 	arg_i = 0;
@@ -31,13 +31,19 @@ int	parse_input(t_stack *pa, int nb_args, char **args)
 		values = ft_split(args[arg_i], WHITE_SPACES);
 		if (values == NULL || values[0] == NULL)
 			return (1);
-		if (add_values_stack(pa, values) != 0)
+		err_code = add_values_stack(pa, values);
+		if (err_code < 0)
 		{
 			free_all(values);
 			return (1);
 		}
-		arg_i++;
+		else if (err_code == 2)
+		{
+			arg_i++;
+			*p_option = args[arg_i];
+		}
 		free_all(values);
+		arg_i++;
 	}
 	if (check_duplicate(pa) != 0)
 	{
@@ -50,6 +56,7 @@ static int	add_values_stack(t_stack *pa, char **values)
 {
 	int		val_i;
 	int		*tmp;
+	int		err_code;
 	t_node	*node_tmp;
 
 	val_i = 0;
@@ -57,19 +64,25 @@ static int	add_values_stack(t_stack *pa, char **values)
 	{
 		tmp = malloc(1 * sizeof(int));
 		if (tmp == NULL)
-			return (1);
-		if (ft_atoi_err(tmp, values[val_i]) != 0)
-		{
-			free(tmp);
+			return (-1);
+		err_code = ft_atoi_err(tmp, values[val_i]);
+		if (err_code == 2)
 			return (2);
+		else if (err_code == 0)
+		{
+			node_tmp = ft_dc_node_new(tmp);
+			if (node_tmp == NULL)
+			{
+				free(tmp);
+				return (-1);
+			}
+			ft_dc_stack_add_back(pa, node_tmp);
 		}
-		node_tmp = ft_dc_node_new(tmp);
-		if (node_tmp == NULL)
+		else
 		{
 			free(tmp);
-			return (1);
+			return (-2);
 		}
-		ft_dc_stack_add_back(pa, node_tmp);
 		val_i++;
 	}
 	return (0);
