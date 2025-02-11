@@ -6,12 +6,15 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:45:41 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/06 18:16:36 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/11 16:54:28 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "instruction.h"
+#include "push_swap.h"
 #include "lists_double_circular.h"
+
+static void	rr_and_s(t_stack *a);
 
 void	insertion_sort(t_stack *a)
 {
@@ -22,10 +25,10 @@ void	insertion_sort(t_stack *a)
 	{
 		if (i != 0)
 		{
-			if (*((int *)a->head->content) < *((int *)a->head->prev->content))
+			if (((t_pair *)a->head->content)->value
+				< ((t_pair *)a->head->prev->content)->value)
 			{
-				inst_rr(a);
-				inst_s(a);
+				rr_and_s(a);
 				i--;
 			}
 			else
@@ -40,4 +43,11 @@ void	insertion_sort(t_stack *a)
 			i++;
 		}
 	}
+}
+
+static void	rr_and_s(t_stack *a)
+{
+	inst_rr(a);
+	inst_s(a);
+	return ;
 }

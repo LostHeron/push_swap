@@ -6,11 +6,12 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:04:21 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/06 18:18:16 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/11 16:50:58 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
+#include "push_swap.h"
 #include "instruction.h"
 
 static int	get_min_index(t_stack a);
@@ -51,13 +52,13 @@ static int	get_min_index(t_stack a)
 	int	min_index;
 
 	i = 0;
-	min = *((int *)(a.head->content));
+	min = ((t_pair *)a.head->content)->value;
 	min_index = 0;
 	while (i < a.size)
 	{
-		if (*((int *)a.head->content) < min)
+		if (((t_pair *)a.head->content)->value < min)
 		{
-			min = *((int *)a.head->content);
+			min = ((t_pair *)a.head->content)->value;
 			min_index = i;
 		}
 		i++;

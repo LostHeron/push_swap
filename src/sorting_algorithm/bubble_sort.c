@@ -6,12 +6,13 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:32:49 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/06 18:13:24 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/11 16:55:23 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
 #include "instruction.h"
+#include "push_swap.h"
 
 void	bubble_sort(t_stack *a)
 {
@@ -26,7 +27,8 @@ void	bubble_sort(t_stack *a)
 		j = 0;
 		while (j < a->size - 1)
 		{
-			if (*((int *)a->head->content) > *((int *)a->head->next->content))
+			if (((t_pair *)a->head->content)->value
+				> ((t_pair *)a->head->next->content)->value)
 			{
 				rotation = 1;
 				inst_s(a);

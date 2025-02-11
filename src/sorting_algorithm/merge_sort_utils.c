@@ -6,12 +6,13 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:53:30 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/10 17:53:54 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/11 16:52:00 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
 #include "instruction.h"
+#include "push_swap.h"
 
 int	get_val1(t_stack b, int c_pos)
 {
@@ -20,7 +21,7 @@ int	get_val1(t_stack b, int c_pos)
 		b.head = b.head->prev;
 		c_pos--;
 	}
-	return (*((int *)b.head->content));
+	return (((t_pair *)b.head->content)->value);
 }
 
 int	get_val2(t_stack b, int c_pos, int middle, int start)
@@ -30,7 +31,7 @@ int	get_val2(t_stack b, int c_pos, int middle, int start)
 		b.head = b.head->next;
 		c_pos++;
 	}
-	return (*((int *)b.head->content));
+	return (((t_pair *)b.head->content)->value);
 }
 
 void	pa_at_start(t_stack **stack_array, int *c_pos)

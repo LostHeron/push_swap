@@ -6,11 +6,12 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:12:38 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/05 15:16:07 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/11 16:47:53 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
+#include "push_swap.h"
 #include "io.h"
 
 static void	in_if(t_stack a, t_stack b);
@@ -49,13 +50,15 @@ static void	in_if(t_stack a, t_stack b)
 	{
 		if (i + b.size < a.size)
 		{
-			ft_printf_fd(1, "%i \t\t  \t\n", *((int *)a.head->content));
+			ft_printf_fd(1, "%i \t\t  \t\n",
+				((t_pair *)a.head->content)->value);
 			a.head = a.head->next;
 		}
 		else
 		{
-			ft_printf_fd(1, "%i \t\t%i \t\n", *((int *)a.head->content),
-				*((int *)b.head->content));
+			ft_printf_fd(1, "%i \t\t%i \t\n",
+				((t_pair *)b.head->content)->value,
+				((t_pair *)b.head->content)->value);
 			a.head = a.head->next;
 			b.head = b.head->next;
 		}
@@ -72,13 +75,15 @@ static void	in_else(t_stack a, t_stack b)
 	{
 		if (i + a.size < b.size)
 		{
-			ft_printf_fd(1, "  \t\t%i \t\n", *((int *)(b.head->content)));
+			ft_printf_fd(1, "  \t\t%i \t\n",
+				((t_pair *) b.head->content)->value);
 			b.head = b.head->next;
 		}
 		else
 		{
-			ft_printf_fd(1, "%i \t\t%i \t\n", *((int *)a.head->content),
-				*((int *)b.head->content));
+			ft_printf_fd(1, "%i \t\t%i \t\n",
+				((t_pair *)a.head->content)->value,
+				((t_pair *)b.head->content)->value);
 			a.head = a.head->next;
 			b.head = b.head->next;
 		}

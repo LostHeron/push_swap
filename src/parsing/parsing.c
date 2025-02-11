@@ -6,13 +6,14 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:22:16 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/11 11:19:56 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/11 16:40:38 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
 #include "parsing.h"
 #include "standard.h"
+#include "push_swap.h"
 #include "io.h"
 #define WHITE_SPACES " \t\n\v\f\r"
 
@@ -49,16 +50,16 @@ int	parse_input(t_stack *pa, int nb_args, char **args)
 static int	add_values_stack(t_stack *pa, char **values)
 {
 	int		val_i;
-	int		*tmp;
+	t_pair	*tmp;
 	t_node	*node_tmp;
 
 	val_i = 0;
 	while (values[val_i] != NULL)
 	{
-		tmp = malloc(1 * sizeof(int));
+		tmp = malloc(1 * sizeof(t_pair));
 		if (tmp == NULL)
 			return (1);
-		if (ft_atoi_err(tmp, values[val_i]) != 0)
+		if (ft_atoi_err(&(tmp->value), values[val_i]) != 0)
 		{
 			free(tmp);
 			return (2);
@@ -91,7 +92,8 @@ static int	check_duplicate(t_stack *pa)
 		while (j < pa->size)
 		{
 			if (node_i != node_j)
-				if (*((int *)node_i->content) == *((int *)node_j->content))
+				if (((t_pair *)node_i->content)->value
+					== ((t_pair *)node_j->content)->value)
 					return (1);
 			node_j = node_j->next;
 			j++;

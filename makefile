@@ -36,6 +36,7 @@ C_FILES := $(NAME).c \
 		   $(addprefix $(PARSING_DIR), $(PARSING_FILES)) \
 		   $(addprefix $(INSTRUCTION_DIR), $(INSTRUCTION_FILES)) \
 		   $(addprefix $(SORTING_DIR), $(SORTING_FILES)) \
+		   $(addprefix $(LISTS_UTILS_DIR), $(LISTS_UTILS_FILES)) \
 
 OBJ_DIR := .obj/
 OBJ_FILES := $(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
