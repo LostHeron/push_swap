@@ -12,13 +12,14 @@
 
 #include "lists_double_circular.h"
 #include "instruction.h"
+#include "io.h"
 
-int	get_val1(t_stack b, int c_pos)
+int	get_val1(t_stack b, int c_pos, int middle, int start)
 {
-	while (c_pos % b.size != 0)
+	while (c_pos % b.size != middle - start - 1)
 	{
-		b.head = b.head->prev;
-		c_pos--;
+		b.head = b.head->next;
+		c_pos++;
 	}
 	return (*((int *)b.head->content));
 }
@@ -33,12 +34,20 @@ int	get_val2(t_stack b, int c_pos, int middle, int start)
 	return (*((int *)b.head->content));
 }
 
-void	pa_at_start(t_stack **stack_array, int *c_pos)
+void	pa_at_start(t_stack **stack_array, int *c_pos, int middle, int start)
 {
-	while (*c_pos % stack_array[1]->size != 0)
+	while (*c_pos % stack_array[1]->size != middle - start - 1)
 	{
-		inst_rr(stack_array[1]);
-		(*c_pos)--;
+		if (*c_pos % stack_array[1]->size < middle - start - 1)
+		{
+			inst_r(stack_array[1]);
+			(*c_pos)++;
+		}
+		else
+		{
+			inst_rr(stack_array[1]);
+			(*c_pos)--;
+		}
 	}
 	inst_pa(stack_array[0], stack_array[1]);
 }

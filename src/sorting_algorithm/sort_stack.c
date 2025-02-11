@@ -22,14 +22,12 @@ int	sort_stack(t_stack *a, t_stack *b)
 	i = 0;
 	if (i == 0)
 	{
-		printf("dans merge sort\n");
 		stack_arr[0] = a;
 		stack_arr[1] = b;
 		merge_sort(stack_arr);
 	}
 	else
 	{
-		printf("dans selection sort\n");
 		selection_sort(a, b);
 	}
 	return (0);
