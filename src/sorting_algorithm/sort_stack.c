@@ -35,7 +35,8 @@ int	sort_stack(t_stack *a, t_stack *b)
 	else if (i == 2)
 	{
 		ft_printf_fd(1, "dans radix_sort\n");
-		radix_sort(a, b);
+		if (radix_sort(a, b) < 0)
+			return (-1);
 	}
 	else
 	{

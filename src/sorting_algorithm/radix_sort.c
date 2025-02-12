@@ -14,21 +14,53 @@
 #include "push_swap.h"
 #include "printing.h"
 #include "instruction.h"
+#include "io.h"
 #include "sorting.h"
 #include <stdlib.h>
 
 static int	indexing(t_stack a);
 static void	sort_array(t_node **node_array, int nb_elems);
 static void	fill_index(t_node **node_array, int nb_elems);
+static int	get_nb_digits(t_stack a);
 
 int	radix_sort(t_stack *a, t_stack *b)
 {
+	int	i;
+	int	j;
+	int	nb_digits;
+	int	nb_elems;
+	int	nb_pushed;
+
 	if (indexing(*a) < 0)
 		return (-1);
-	inst_pb(a, b);
-	print_stacks_index(*a, *b);
-	bubble_sort(a);
-	print_stacks_index(*a, *b);
+	nb_digits = get_nb_digits(*a);
+	nb_elems = a->size;
+	i = 0;
+	while (i < nb_digits)
+	{
+		j = 0;
+		nb_pushed = 0;
+		while (j < nb_elems)
+		{
+			if ((((t_pair *)a->head->content)->index & (1 << i)) == 0)
+			{
+				inst_pb(a, b);
+				nb_pushed++;
+			}
+			else
+			{
+				inst_r(a);
+			}
+			j++;
+		}
+		j = 0;
+		while (j < nb_pushed)
+		{
+			inst_pa(a, b);
+			j++;
+		}
+		i++;
+	}
 	return (0);
 }
 
@@ -87,4 +119,20 @@ static void	fill_index(t_node **node_array, int nb_elems)
 		((t_pair *)node_array[i]->content)->index = i;
 		i++;
 	}
+}
+
+static int	get_nb_digits(t_stack a)
+{
+	int	nb_digits;
+	int	nb_elems;
+
+	nb_elems = a.size;
+	nb_digits = 0;
+	while (nb_elems > 1)
+	{
+		nb_elems = nb_elems / 2;
+		nb_digits++;
+	}
+	nb_digits++;
+	return (nb_digits);
 }

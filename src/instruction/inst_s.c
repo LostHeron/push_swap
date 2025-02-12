@@ -11,22 +11,10 @@
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
-#include "push_swap.h"
 #include "io.h"
 
 void	inst_s(t_stack *a)
 {
-	/*
-	int		tmp;
-	t_node	*head;
-	t_node	*next;
-
-	head = a->head;
-	next = head->next;
-	tmp = ((t_pair *)head->content)->value;
-	((t_pair *)head->content)->value = ((t_pair *)next->content)->value;
-	((t_pair *)next->content)->value = tmp;
-	*/
 	t_node	*tmp_prev;
 	t_node	*tmp_next_next;
 	t_node	*old_head;
