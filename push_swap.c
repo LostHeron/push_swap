@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	sort_stack(&a, &b);
 	ft_printf_fd(1, "stack apres sort : \n");
 	print_stacks(a, b);
+	ft_printf_fd(1, "nb_elems = %i\n", a.size);
 	ft_dc_stack_clear(&a, &my_free);
 	ft_dc_stack_clear(&b, &my_free);
 }

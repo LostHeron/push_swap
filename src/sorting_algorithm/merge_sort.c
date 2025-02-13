@@ -31,6 +31,7 @@ void	merge_sort(t_stack **stack_array)
 	int	end;
 	int	current_pos;
 
+	ft_printf_fd(1, "dans merge_sort la vrai \n");
 	start = 0;
 	end = stack_array[0]->size;
 	current_pos = 0;
@@ -57,24 +58,8 @@ static void	merge_sort_sort(t_stack **stacks, int *c_pos, int start, int end)
 
 	middle = (start + end) / 2 ;
 	nb_elems = stacks[0]->size;
-	//ft_printf_fd(1, "~~~~~~~~~~~~~~~~~~\n");
-	//ft_printf_fd(1, "start = %i\n", start);
-	//ft_printf_fd(1, "middle = %i\n", middle);
-	//ft_printf_fd(1, "end = %i\n", end);
-	//ft_printf_fd(1, "~~~~~~~~~~~~~~~~~~\n");
-	//ft_printf_fd(1, "*c_pos = %i\n", *c_pos);
-	//ft_printf_fd(1, "stacks[0]->size = %i\n", stacks[0]->size);
-	//ft_printf_fd(1, "*c_pos %% (stacks[0]->size) = %i\n", *c_pos % (stacks[0]->size));
 	while (*c_pos % (stacks[0]->size) != start)
 	{
-		//ft_printf_fd(1, "dans premier boucle c_pos\n");
-		//ft_printf_fd(1, "*c_pos = %i\n", *c_pos);
-		//ft_printf_fd(1, "stacks[0]->size = %i\n", stacks[0]->size);
-		//ft_printf_fd(1, "*c_pos %% (stacks[0]->size) = %i\n", *c_pos % (stacks[0]->size));
-		//ft_printf_fd(1, "start = %i\n", start);
-		//ft_printf_fd(1, "middle = %i\n", middle);
-		//ft_printf_fd(1, "end = %i\n", end);
-		//ft_printf_fd(1, "\n", end);
 		if (start > *c_pos)
 		{
 			inst_r(stacks[0]);
@@ -86,52 +71,42 @@ static void	merge_sort_sort(t_stack **stacks, int *c_pos, int start, int end)
 			(*c_pos)--;
 		}
 	}
-	counter = 0;
-	while (start + counter < middle)
+	if (end - start == 2)
 	{
-		//ft_printf_fd(1, "Push dans premiere boucle \n");
-		////ft_printf_fd(1, "start = %i\n", start);
-		////ft_printf_fd(1, "middle = %i\n", middle);
-		////ft_printf_fd(1, "end = %i\n", end);
-		////ft_printf_fd(1, "\n", end);
-		inst_pb(stacks[0], stacks[1]);
-		counter++;
+		if (*((int *)stacks[0]->head->content)
+			> *((int *)stacks[0]->head->next->content))
+			inst_s(stacks[0]);
 	}
-	while (*c_pos % (nb_elems) != end - counter)
+	else
 	{
-		//ft_printf_fd(1, "\tdans deuxieme boucle c_pos\n");
-		//ft_printf_fd(1, "\ton veut bouger c_pos tant que :\n" );
-		//ft_printf_fd(1, "\t*c_pos %% (nb_elems) != end - counter \n");
-		//ft_printf_fd(1, "\ten - counter = %i\n", end - counter);
-		//ft_printf_fd(1, "\tcounter = %i\n", counter);
-		//ft_printf_fd(1, "\t*c_pos %% (nb_elems) = %i\n", *c_pos % (nb_elems));
-		//ft_printf_fd(1, "\t*c_pos = %i\n", *c_pos);
-		//ft_printf_fd(1, "\tstacks[0]->size = %i\n", stacks[0]->size);
-		//ft_printf_fd(1, "\tstart = %i\n", start);
-		//ft_printf_fd(1, "\tmiddle = %i\n", middle);
-		//ft_printf_fd(1, "\tend = %i\n", end);
-		//ft_printf_fd(1, "\t\n", end);
-		if (end - 1 > *c_pos)
+		counter = 0;
+		while (start + counter < middle)
 		{
-			inst_r(stacks[0]);
-			(*c_pos)++;
+			inst_pb(stacks[0], stacks[1]);
+			counter++;
 		}
-		else
+		while (*c_pos % (nb_elems) != end - counter)
+		{
+			if (end - 1 > *c_pos)
+			{
+				inst_r(stacks[0]);
+				(*c_pos)++;
+			}
+			else
+			{
+				inst_rr(stacks[0]);
+				(*c_pos)--;
+			}
+		}
+		counter = 0;
+		while (end - counter > middle)
 		{
 			inst_rr(stacks[0]);
-			(*c_pos)--;
+			inst_pb(stacks[0], stacks[1]);
+			counter++;
 		}
+		pushing_back(stacks, start, end, c_pos);
 	}
-	counter = 0;
-	while (end - counter > middle)
-	{
-		//ft_printf_fd(1, "Push dans deuxieme boucle \n");
-		inst_rr(stacks[0]);
-		inst_pb(stacks[0], stacks[1]);
-		counter++;
-	}
-	pushing_back(stacks, start, end, c_pos);
-	//ft_printf_fd(1, "sortie pushing_back\n");
 	*c_pos = start;
 }
 
