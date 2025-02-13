@@ -41,8 +41,8 @@ int	main(int argc, char **argv)
 		ft_printf_fd(1, "Error\n");
 		return (1);
 	}
-	//ft_printf_fd(1, "stack avant sort : \n");
-	//print_stacks(a, b);
+	ft_printf_fd(1, "stack avant sort : \n");
+	print_stacks(a, b);
 	sort_stack(&a, &b);
 	ft_printf_fd(1, "stack apres sort : \n");
 	print_stacks_index(a, b);
