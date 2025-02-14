@@ -29,7 +29,9 @@ SORTING_FILES := sort_stack.c \
 				 insertion_sort.c \
 				 merge_sort.c \
 				 merge_sort_utils.c \
+				 indexing.c \
 				 radix_sort.c \
+				 radix_sort_ternary.c \
 
 
 FILES_INCLUDES := includes/
