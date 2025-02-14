@@ -6,54 +6,60 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:35:37 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/10 18:40:00 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/14 12:18:30 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
 #include "instruction.h"
+#include "merge_sort.h"
 
-static void	merge_sort_rec(t_stack **stacks, int *c_pos, int start, int end);
-static void	merge_sort_sort(t_stack **stacks, int *c_pos, int start, int end);
-static void	pushing_back(t_stack **stacks, int start, int end);
-static void	chose_push(t_stack **stacks, int *pc_pos, int *p_middle, int start);
-int			get_val1(t_stack b, int c_pos);
-int			get_val2(t_stack b, int c_pos, int middle, int start);
-void		pa_at_middle(t_stack **stacks, int *c_pos, int middle, int start);
-void		pa_at_start(t_stack **stacks, int *c_pos);
+static void	merge_sort_rec(t_stack **stacks, int *c_pos, t_pos pos, int order);
+static void	merge_sort_sort(t_stack **stacks, int *c_pos, t_pos pos, int order);
+static void	pushing_back(t_stack **stacks, int start, int end, int order);
+static void	chose_push(t_stack **stacks, int *p_middle, int order);
+void		case_size_two(t_stack **stacks, int order);
+int			get_val_start(t_stack b);
+int			get_val_end(t_stack b);
+void		pa_at_end(t_stack **stacks);
 int			get_middle(int start, int end);
 
 void	merge_sort(t_stack **stack_array)
 {
-	int	start;
-	int	end;
-	int	current_pos;
+	int		current_pos;
+	t_pos	init_pos;
 
-	start = 0;
-	end = stack_array[0]->size;
+	init_pos.start = 0;
+	init_pos.end = stack_array[0]->size;
 	current_pos = 0;
-	merge_sort_rec(stack_array, &current_pos, start, end);
+	merge_sort_rec(stack_array, &current_pos, init_pos, -1);
 }
 
-static void	merge_sort_rec(t_stack **stacks, int *c_pos, int start, int end)
+static void	merge_sort_rec(t_stack **stacks, int *c_pos, t_pos pos, int order)
 {
-	int	middle;
+	int		middle;
+	t_pos	pos1;
+	t_pos	pos2;
 
-	if (end - start <= 1)
+	if (pos.end - pos.start <= 1)
 		return ;
-	middle = (start + end) / 2;
-	merge_sort_rec(stacks, c_pos, start, middle);
-	merge_sort_rec(stacks, c_pos, middle, end);
-	merge_sort_sort(stacks, c_pos, start, end);
+	middle = (pos.start + pos.end) / 2;
+	pos1.start = pos.start;
+	pos1.end = middle;
+	pos2.start = middle;
+	pos2.end = pos.end;
+	merge_sort_rec(stacks, c_pos, pos1, order * -1);
+	merge_sort_rec(stacks, c_pos, pos2, -order * -1);
+	merge_sort_sort(stacks, c_pos, pos, order);
 }
 
-static void	merge_sort_sort(t_stack **stacks, int *c_pos, int start, int end)
+static void	merge_sort_sort(t_stack **stacks, int *c_pos, t_pos pos, int order)
 {
 	int	counter;
 
-	while (*c_pos % (stacks[0]->size) != start)
+	while (*c_pos % (stacks[0]->size) != pos.start)
 	{
-		if (start > *c_pos)
+		if (pos.start > *c_pos)
 		{
 			inst_r(stacks[0]);
 			(*c_pos)++;
@@ -64,16 +70,19 @@ static void	merge_sort_sort(t_stack **stacks, int *c_pos, int start, int end)
 			(*c_pos)--;
 		}
 	}
-	counter = 0;
-	while (start + counter < end)
+	if (pos.end - pos.start == 2)
+		case_size_two(stacks, order);
+	else
 	{
-		inst_pb(stacks[0], stacks[1]);
-		counter++;
+		counter = -1;
+		while (pos.start + ++counter < pos.end)
+			inst_pb(stacks[0], stacks[1]);
+		pushing_back(stacks, pos.start, pos.end, order);
 	}
-	pushing_back(stacks, start, end);
+	*c_pos = pos.start;
 }
 
-static void	pushing_back(t_stack **stacks, int start, int end)
+static void	pushing_back(t_stack **stacks, int start, int end, int order)
 {
 	int		i;
 	int		c_pos;
@@ -87,33 +96,46 @@ static void	pushing_back(t_stack **stacks, int start, int end)
 	while (i < nb_elems - 1)
 	{
 		c_pos = c_pos % stacks[1]->size;
-		if (end <= middle)
+		if (end < middle)
 		{
-			pa_at_start(stacks, &c_pos);
+			inst_pa(stacks[0], stacks[1]);
 			middle--;
 		}
 		else if (middle <= start)
-			pa_at_middle(stacks, &c_pos, middle, start);
+			pa_at_end(stacks);
 		else
-			chose_push(stacks, &c_pos, &middle, start);
+			chose_push(stacks, &middle, order);
 		end--;
 		i++;
 	}
 	inst_pa(stacks[0], stacks[1]);
 }
 
-static void	chose_push(t_stack **stacks, int *pc_pos, int *p_middle, int start)
+static void	chose_push(t_stack **stacks, int *p_middle, int order)
 {
-	int	val1;
-	int	val2;
+	int	val_start;
+	int	val_end;
 
-	val1 = get_val1(*stacks[1], *pc_pos);
-	val2 = get_val2(*stacks[1], *pc_pos, *p_middle, start);
-	if (val1 > val2)
+	val_start = get_val_start(*stacks[1]);
+	val_end = get_val_end(*stacks[1]);
+	if (order == -1)
 	{
-		pa_at_start(stacks, pc_pos);
-		(*p_middle)--;
+		if (val_start > val_end)
+		{
+			inst_pa(stacks[0], stacks[1]);
+			(*p_middle)--;
+		}
+		else
+			pa_at_end(stacks);
 	}
 	else
-		pa_at_middle(stacks, pc_pos, *p_middle, start);
+	{
+		if (val_start > val_end)
+			pa_at_end(stacks);
+		else
+		{
+			inst_pa(stacks[0], stacks[1]);
+			(*p_middle)--;
+		}
+	}
 }

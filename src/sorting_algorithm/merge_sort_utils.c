@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:53:30 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/11 16:52:00 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/14 12:18:22 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,36 @@
 #include "instruction.h"
 #include "push_swap.h"
 
-int	get_val1(t_stack b, int c_pos)
+int	get_val_start(t_stack b)
 {
-	while (c_pos % b.size != 0)
-	{
-		b.head = b.head->prev;
-		c_pos--;
-	}
-	return (((t_pair *)b.head->content)->value);
+	return (*((int *)b.head->content));
 }
 
-int	get_val2(t_stack b, int c_pos, int middle, int start)
+int	get_val_end(t_stack b)
 {
-	while (c_pos % b.size != middle - start)
-	{
-		b.head = b.head->next;
-		c_pos++;
-	}
-	return (((t_pair *)b.head->content)->value);
+	return (*((int *)b.head->prev->content));
 }
 
-void	pa_at_start(t_stack **stack_array, int *c_pos)
+void	case_size_two(t_stack **stacks, int order)
 {
-	while (*c_pos % stack_array[1]->size != 0)
+	if (order == -1)
 	{
-		inst_rr(stack_array[1]);
-		(*c_pos)--;
+		if (*((int *)stacks[0]->head->content)
+			> *((int *)stacks[0]->head->next->content))
+			inst_s(stacks[0]);
 	}
-	inst_pa(stack_array[0], stack_array[1]);
+	else
+	{
+		if (*((int *)stacks[0]->head->content)
+			< *((int *)stacks[0]->head->next->content))
+			inst_s(stacks[0]);
+	}
 }
 
-void	pa_at_middle(t_stack **stack_array, int *c_pos, int middle, int start)
+void	pa_at_end(t_stack **stacks)
 {
-	while (*c_pos % stack_array[1]->size != middle - start)
-	{
-		inst_r(stack_array[1]);
-		(*c_pos)++;
-	}
-	inst_pa(stack_array[0], stack_array[1]);
+	inst_rr(stacks[1]);
+	inst_pa(stacks[0], stacks[1]);
 }
 
 int	get_middle(int start, int end)
