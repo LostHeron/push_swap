@@ -19,7 +19,7 @@ int	sort_stack(t_stack *a, t_stack *b)
 	int		i;
 	t_stack	*stacks[2];
 
-	i = 3;
+	i = 0;
 	stacks[0] = a;
 	stacks[1] = b;
 	if (i == 0)

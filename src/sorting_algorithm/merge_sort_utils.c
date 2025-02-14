@@ -16,26 +16,26 @@
 
 int	get_val_start(t_stack b)
 {
-	return (*((int *)b.head->content));
+	return (((t_pair *)b.head->content)->value);
 }
 
 int	get_val_end(t_stack b)
 {
-	return (*((int *)b.head->prev->content));
+	return (((t_pair *)b.head->prev->content)->value);
 }
 
 void	case_size_two(t_stack **stacks, int order)
 {
 	if (order == -1)
 	{
-		if (*((int *)stacks[0]->head->content)
-			> *((int *)stacks[0]->head->next->content))
+		if (((t_pair *)stacks[0]->head->content)->value
+			> ((t_pair *)stacks[0]->head->next->content)->value)
 			inst_s(stacks[0]);
 	}
 	else
 	{
-		if (*((int *)stacks[0]->head->content)
-			< *((int *)stacks[0]->head->next->content))
+		if (((t_pair *)stacks[0]->head->content)->value
+			< ((t_pair *)stacks[0]->head->next->content)->value)
 			inst_s(stacks[0]);
 	}
 }
