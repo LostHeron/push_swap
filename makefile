@@ -1,6 +1,6 @@
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 LIBFT_DIR = src/libft/
 LIBFT_FILES = libft.a
@@ -19,11 +19,14 @@ INSTRUCTION_DIR := src/instruction/
 INSTRUCTION_FILES :=  inst_pa.c \
 					  inst_pb.c \
 					  inst_r.c \
+					  inst_r_both.c \
 					  inst_rr.c \
+					  inst_rr_both.c \
 					  inst_s.c \
 
 SORTING_DIR := src/sorting_algorithm/
 SORTING_FILES := sort_stack.c \
+				 sort_three.c \
 				 selection_sort.c \
 				 bubble_sort.c \
 				 insertion_sort.c \
@@ -32,6 +35,7 @@ SORTING_FILES := sort_stack.c \
 				 indexing.c \
 				 radix_sort.c \
 				 radix_sort_ternary.c \
+				 cost_sort.c \
 
 
 FILES_INCLUDES := includes/

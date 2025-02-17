@@ -57,7 +57,7 @@ static void	in_if(t_stack a, t_stack b)
 		else
 		{
 			ft_printf_fd(1, "%i \t\t%i \t\n",
-				((t_pair *)b.head->content)->value,
+				((t_pair *)a.head->content)->value,
 				((t_pair *)b.head->content)->value);
 			a.head = a.head->next;
 			b.head = b.head->next;

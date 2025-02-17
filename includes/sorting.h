@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:36:13 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/14 11:20:56 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:08:35 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ void	merge_sort(t_stack **stack_array);
 int		indexing(t_stack a);
 int		radix_sort(t_stack *a, t_stack *b);
 int		radix_sort_ternary(t_stack **stacks);
+void	sort_three(t_stack *a);
+int		cost_sort(t_stack *a, t_stack *b);
 
 #endif

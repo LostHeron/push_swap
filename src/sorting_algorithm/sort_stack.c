@@ -19,7 +19,7 @@ int	sort_stack(t_stack *a, t_stack *b)
 	int		i;
 	t_stack	*stacks[2];
 
-	i = 0;
+	i = 4;
 	stacks[0] = a;
 	stacks[1] = b;
 	if (i == 0)
@@ -42,6 +42,12 @@ int	sort_stack(t_stack *a, t_stack *b)
 	{
 		ft_printf_fd(1, "dans radix_sort_ternary\n");
 		if (radix_sort_ternary(stacks) < 0)
+			return (-1);
+	}
+	else if (i == 4)
+	{
+		ft_printf_fd(1, "dans cost_sort\n");
+		if (cost_sort(a, b) < 0)
 			return (-1);
 	}
 	else
