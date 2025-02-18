@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "push_swap.h"
+#include "push_swap.h"
 #include "lists_double_circular.h"
 #include "io.h"
 #include "parsing.h"
@@ -19,6 +19,7 @@
 #include <stdlib.h>
 
 static void	*my_free(void *content);
+static int	check_sorted(t_stack a);
 
 int	main(int argc, char **argv)
 {
@@ -38,8 +39,12 @@ int	main(int argc, char **argv)
 	if (parse_input(&a, argc - 1, argv + 1) != 0)
 	{
 		ft_dc_stack_clear(&a, &my_free);
-		ft_printf_fd(1, "Error\n");
+		ft_printf_fd(2, "Error\n");
 		return (1);
+	}
+	if (check_sorted(a) == 0)
+	{
+		return (0);
 	}
 	ft_printf_fd(1, "stack avant sort : \n");
 	print_stacks(a, b);
@@ -49,6 +54,24 @@ int	main(int argc, char **argv)
 	ft_printf_fd(1, "nb_elems = %i\n", a.size);
 	ft_dc_stack_clear(&a, &my_free);
 	ft_dc_stack_clear(&b, &my_free);
+}
+
+static int	check_sorted(t_stack a)
+{
+	int	i;
+
+	if (a.size == 1)
+		return (0);
+	i = 0;
+	while (i < a.size - 1)
+	{
+		if (((t_pair *)a.head->content)->value
+			> ((t_pair *)a.head->next->content)->value)
+			return (1);
+		a.head = a.head->next;
+		i++;
+	}
+	return (0);
 }
 
 static void	*my_free(void *content)

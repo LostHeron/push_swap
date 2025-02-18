@@ -13,6 +13,7 @@
 #include "lists_double_circular.h"
 #include "push_swap.h"
 #include "instruction.h"
+#include <stdlib.h>
 
 static void	case_nb1_greater_nb3(t_stack *a, int nb1, int nb2, int nb3);
 static void	case_nb1_lower_nb3(t_stack *a, int nb1, int nb2, int nb3);
@@ -27,13 +28,9 @@ void	sort_three(t_stack *a)
 	nb2 = ((t_pair *)a->head->next->content)->value;
 	nb3 = ((t_pair *)a->head->next->next->content)->value;
 	if (nb1 > nb3)
-	{
 		case_nb1_greater_nb3(a, nb1, nb2, nb3);
-	}
 	else
-	{
 		case_nb1_lower_nb3(a, nb1, nb2, nb3);
-	}
 	return ;
 }
 

@@ -9,6 +9,7 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_FILES)
 
 PRINT_DIR := src/printing/
 PRINT_FILES := print_stacks.c \
+			   print_stacks_horizontal.c \
 			   print_stacks_index.c \
 
 PARSING_DIR := src/parsing/
@@ -36,6 +37,8 @@ SORTING_FILES := sort_stack.c \
 				 radix_sort.c \
 				 radix_sort_ternary.c \
 				 cost_sort.c \
+				 cost_sort_utils.c \
+				 cost_sort_pushs.c \
 
 
 FILES_INCLUDES := includes/
