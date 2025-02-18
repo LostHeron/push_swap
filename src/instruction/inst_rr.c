@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:23:01 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/06 18:03:49 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/18 17:45:46 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 #include "io.h"
 #include <stdlib.h>
 
-void	inst_rr(t_stack *a)
+int	inst_rr(t_stack *a)
 {
 	if (a->head == NULL)
-		return ;
+		return (-2);
 	a->head = a->head->prev;
-	ft_printf_fd(1, "rr%s\n", a->name);
+	if (ft_printf_fd(1, "rr%s\n", a->name) < 0)
+		return (-1);
+	return (0);
 }

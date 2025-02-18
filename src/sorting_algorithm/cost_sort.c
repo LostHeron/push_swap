@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:44:46 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/18 16:47:20 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/18 17:12:28 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "lists_double_circular.h"
 #include "math.h"
 #include "push_swap.h"
+#include "sorting.h"
 
 static void		chose_push(t_stack *a, t_stack *b);
 static t_inst	get_nb_inst(t_stack a, t_stack b, int j);
@@ -25,8 +26,7 @@ static void		push_using(t_stack *a, t_stack *b, t_inst inst);
 
 int	cost_sort(t_stack *a, t_stack *b)
 {
-	while (a->size > 3)
-		inst_pb(a, b);
+	push_all_to_b(a, b);
 	sort_three(a);
 	while (b->size > 0)
 	{

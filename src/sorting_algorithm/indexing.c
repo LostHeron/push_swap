@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:09:43 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/14 11:10:30 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/18 18:13:47 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	indexing(t_stack a)
 
 	node_array = malloc(a.size * sizeof(t_node *));
 	if (node_array == NULL)
-		return (-1);
+		return (-3);
 	i = 0;
 	while (i < a.size)
 	{
@@ -38,6 +38,7 @@ int	indexing(t_stack a)
 		((t_pair *)node_array[i]->content)->index = i;
 		i++;
 	}
+	free(node_array);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:48:24 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/14 11:20:21 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/18 18:25:24 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	sort_stack(t_stack *a, t_stack *b)
 	int		i;
 	t_stack	*stacks[2];
 
-	i = 4;
+	i = 5;
 	stacks[0] = a;
 	stacks[1] = b;
 	if (i == 0)
@@ -34,7 +34,7 @@ int	sort_stack(t_stack *a, t_stack *b)
 	}
 	else if (i == 2)
 	{
-		ft_printf_fd(1, "dans radix_sort\n");
+		ft_printf_fd(1, "ici dans radix_sort\n");
 		if (radix_sort(a, b) < 0)
 			return (-1);
 	}
@@ -50,10 +50,15 @@ int	sort_stack(t_stack *a, t_stack *b)
 		if (cost_sort(a, b) < 0)
 			return (-1);
 	}
-	else
+	else if (i == 5)
 	{
 		ft_printf_fd(1, "dans selection sort\n");
 		selection_sort(a, b);
+	}
+	else if (i == 6)
+	{
+		ft_printf_fd(1, "dans insertion sort\n");
+		insertion_sort(a);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:58:02 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/18 16:47:06 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/18 17:12:06 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	push_using_ra_rb(t_stack *a, t_stack *b, t_inst inst);
 void	push_using_rra_rrb(t_stack *a, t_stack *b, t_inst inst);
 void	push_using_rra_rb(t_stack *a, t_stack *b, t_inst inst);
 void	push_using_ra_rrb(t_stack *a, t_stack *b, t_inst inst);
+void	push_all_to_b(t_stack *a, t_stack *b);
 
 #endif 

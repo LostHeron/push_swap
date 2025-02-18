@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:32:49 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/11 16:55:23 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/18 17:57:23 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include "instruction.h"
 #include "push_swap.h"
 
-void	bubble_sort(t_stack *a)
+static int	chose_swap(t_stack *a, int *rotation);
+
+int	bubble_sort(t_stack *a)
 {
 	int		i;
 	int		j;
@@ -25,20 +27,31 @@ void	bubble_sort(t_stack *a)
 	while (i < a->size)
 	{
 		j = 0;
-		while (j < a->size - 1)
+		while (++j < a->size - 1)
 		{
-			if (((t_pair *)a->head->content)->value
-				> ((t_pair *)a->head->next->content)->value)
-			{
-				rotation = 1;
-				inst_s(a);
-			}
-			inst_r(a);
+			if (chose_swap(a, &rotation) < 0)
+				return (-1);
 			j++;
 		}
-		inst_r(a);
+		if (inst_r(a) < 0)
+			return (-1);
 		if (rotation == 0)
 			break ;
 		i++;
 	}
+	return (0);
+}
+
+static int	chose_swap(t_stack *a, int *rotation)
+{
+	if (((t_pair *)a->head->content)->value
+		> ((t_pair *)a->head->next->content)->value)
+	{
+		*rotation = 1;
+		if (inst_s(a) < 0)
+			return (-1);
+	}
+	if (inst_r(a) < 0)
+		return (-1);
+	return (0);
 }

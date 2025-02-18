@@ -6,14 +6,14 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:29:01 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/11 17:05:19 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/18 17:45:26 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists_double_circular.h"
 #include "io.h"
 
-void	inst_s(t_stack *a)
+int	inst_s(t_stack *a)
 {
 	t_node	*tmp_prev;
 	t_node	*tmp_next_next;
@@ -31,5 +31,7 @@ void	inst_s(t_stack *a)
 	old_next->prev = tmp_prev;
 	old_head->prev = old_next;
 	old_head->next = tmp_next_next;
-	ft_printf_fd(1, "s%s\n", a->name);
+	if (ft_printf_fd(1, "s%s\n", a->name) < 0)
+		return (-1);
+	return (0);
 }

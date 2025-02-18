@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:43:48 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/18 16:47:09 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/18 17:12:00 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,25 @@
 #include "push_swap.h"
 #include "instruction.h"
 #include "math.h"
+#include "sorting.h"
+
+void	push_all_to_b(t_stack *a, t_stack *b)
+{
+	int	middle;
+
+	middle = a->size / 2;
+	indexing(*a);
+	while (a->size > 3)
+	{
+		if (((t_pair *)a->head->content)->index > middle)
+			inst_pb(a, b);
+		else
+		{
+			inst_pb(a, b);
+			inst_r(b);
+		}
+	}
+}
 
 void	calculate_rr_and_rrr(t_inst *inst)
 {
