@@ -13,12 +13,11 @@
 #include "lists_double_circular.h"
 #include "push_swap.h"
 #include "instruction.h"
-#include <stdlib.h>
 
-static void	case_nb1_greater_nb3(t_stack *a, int nb1, int nb2, int nb3);
-static void	case_nb1_lower_nb3(t_stack *a, int nb1, int nb2, int nb3);
+static int	case_nb1_greater_nb3(t_stack *a, int nb1, int nb2, int nb3);
+static int	case_nb1_lower_nb3(t_stack *a, int nb1, int nb2, int nb3);
 
-void	sort_three(t_stack *a)
+int	sort_three(t_stack *a)
 {
 	int	nb1;
 	int	nb2;
@@ -28,38 +27,51 @@ void	sort_three(t_stack *a)
 	nb2 = ((t_pair *)a->head->next->content)->value;
 	nb3 = ((t_pair *)a->head->next->next->content)->value;
 	if (nb1 > nb3)
-		case_nb1_greater_nb3(a, nb1, nb2, nb3);
+	{
+		if (case_nb1_greater_nb3(a, nb1, nb2, nb3) < 0)
+			return (-1);
+	}
 	else
-		case_nb1_lower_nb3(a, nb1, nb2, nb3);
-	return ;
+		if (case_nb1_lower_nb3(a, nb1, nb2, nb3) < 0)
+			return (-1);
+	return (0);
 }
 
-static void	case_nb1_greater_nb3(t_stack *a, int nb1, int nb2, int nb3)
+static int	case_nb1_greater_nb3(t_stack *a, int nb1, int nb2, int nb3)
 {
 	if (nb1 > nb2)
 	{
 		if (nb2 > nb3)
 		{
-			inst_s(a);
-			inst_rr(a);
+			if (inst_s(a) < 0)
+				return (-1);
+			if (inst_rr(a) < 0)
+				return (-1);
 		}
 		else
-			inst_r(a);
+			if (inst_r(a) < 0)
+				return (-1);
 	}
 	else
-		inst_rr(a);
+		if (inst_rr(a) < 0)
+			return (-1);
+	return (0);
 }
 
-static void	case_nb1_lower_nb3(t_stack *a, int nb1, int nb2, int nb3)
+static int	case_nb1_lower_nb3(t_stack *a, int nb1, int nb2, int nb3)
 {
 	if (nb1 < nb2)
 	{
 		if (nb2 > nb3)
 		{
-			inst_rr(a);
-			inst_s(a);
+			if (inst_rr(a) < 0)
+				return (-1);
+			if (inst_s(a) < 0)
+				return (-1);
 		}
 	}
 	else
-		inst_s(a);
+		if (inst_s(a) < 0)
+			return (-1);
+	return (0);
 }

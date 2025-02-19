@@ -17,7 +17,7 @@
 int	inst_rr(t_stack *a)
 {
 	if (a->head == NULL)
-		return (-2);
+		return (0);
 	a->head = a->head->prev;
 	if (ft_printf_fd(1, "rr%s\n", a->name) < 0)
 		return (-1);

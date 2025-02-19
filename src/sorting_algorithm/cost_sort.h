@@ -29,11 +29,11 @@ typedef struct s_inst
 
 void	calculate_rr_and_rrr(t_inst *inst);
 int		get_ra(t_stack a, int val_b);
-void	rotate_to_min(t_stack *a);
-void	push_using_ra_rb(t_stack *a, t_stack *b, t_inst inst);
-void	push_using_rra_rrb(t_stack *a, t_stack *b, t_inst inst);
-void	push_using_rra_rb(t_stack *a, t_stack *b, t_inst inst);
-void	push_using_ra_rrb(t_stack *a, t_stack *b, t_inst inst);
-void	push_all_to_b(t_stack *a, t_stack *b);
+int		rotate_to_min(t_stack *a);
+int		push_using_ra_rb(t_stack *a, t_stack *b, t_inst inst);
+int		push_using_rra_rrb(t_stack *a, t_stack *b, t_inst inst);
+int		push_using_rra_rb(t_stack *a, t_stack *b, t_inst inst);
+int		push_using_ra_rrb(t_stack *a, t_stack *b, t_inst inst);
+int		push_all_to_b(t_stack *a, t_stack *b);
 
 #endif 

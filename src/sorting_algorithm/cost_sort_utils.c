@@ -16,22 +16,31 @@
 #include "math.h"
 #include "sorting.h"
 
-void	push_all_to_b(t_stack *a, t_stack *b)
+static int	chose_side(t_stack *a, int nb_rotate);
+
+int	push_all_to_b(t_stack *a, t_stack *b)
 {
 	int	middle;
 
 	middle = a->size / 2;
-	indexing(*a);
+	if (indexing(*a) < 0)
+		return (-3);
 	while (a->size > 3)
 	{
 		if (((t_pair *)a->head->content)->index > middle)
-			inst_pb(a, b);
+		{
+			if (inst_pb(a, b) < 0)
+				return (-1);
+		}
 		else
 		{
-			inst_pb(a, b);
-			inst_r(b);
+			if (inst_pb(a, b) < 0)
+				return (-1);
+			if (inst_r(b) < 0)
+				return (-1);
 		}
 	}
+	return (0);
 }
 
 void	calculate_rr_and_rrr(t_inst *inst)
@@ -75,7 +84,7 @@ int	get_ra(t_stack a, int val_b)
 		return (count_ra + 1);
 }
 
-void	rotate_to_min(t_stack *a)
+int	rotate_to_min(t_stack *a)
 {
 	int		i;
 	int		nb_rotate;
@@ -95,11 +104,25 @@ void	rotate_to_min(t_stack *a)
 		}
 		tmp = tmp->next;
 	}
+	if (chose_side(a, nb_rotate) < 0)
+		return (-1);
+	return (0);
+}
+
+static int	chose_side(t_stack *a, int nb_rotate)
+{
+	int	i;
+
 	i = -1;
 	if (nb_rotate > a->size / 2)
+	{
 		while (++i < a->size - nb_rotate)
-			inst_rr(a);
+			if (inst_rr(a) < 0)
+				return (-1);
+	}
 	else
 		while (++i < nb_rotate)
-			inst_r(a);
+			if (inst_r(a) < 0)
+				return (-1);
+	return (0);
 }

@@ -17,7 +17,7 @@
 int	inst_rr_both(t_stack *a, t_stack *b)
 {
 	if (a->head == NULL)
-		return (-2);
+		return (0);
 	a->head = a->head->prev;
 	b->head = b->head->prev;
 	if (ft_printf_fd(1, "rrr\n") < 0)

@@ -20,7 +20,7 @@ int	inst_pa(t_stack *pa, t_stack *pb)
 
 	tmp = ft_dc_stack_rem(pb);
 	if (tmp == NULL)
-		return (-2);
+		return (0);
 	ft_dc_stack_add(pa, tmp);
 	if (ft_printf_fd(1, "pa\n") < 0)
 		return (-1);

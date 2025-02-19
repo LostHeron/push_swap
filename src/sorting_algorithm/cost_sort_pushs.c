@@ -15,56 +15,70 @@
 #include "math.h"
 #include "cost_sort.h"
 
-void	push_using_ra_rb(t_stack *a, t_stack *b, t_inst inst)
+int	push_using_ra_rb(t_stack *a, t_stack *b, t_inst inst)
 {
 	int	i;
 
 	i = -1;
 	while (++i < inst.nb_rr)
-		inst_r_both(a, b);
+		if (inst_r_both(a, b) < 0)
+			return (-1);
 	i = -1;
 	while (++i < ft_abs(inst.nb_rr - inst.nb_rb))
-		inst_r(b);
+		if (inst_r(b) < 0)
+			return (-1);
 	i = -1;
 	while (++i < ft_abs(inst.nb_rr - inst.nb_ra))
-		inst_r(a);
+		if (inst_r(a) < 0)
+			return (-1);
+	return (0);
 }
 
-void	push_using_rra_rrb(t_stack *a, t_stack *b, t_inst inst)
+int	push_using_rra_rrb(t_stack *a, t_stack *b, t_inst inst)
 {
 	int	i;
 
 	i = -1;
 	while (++i < inst.nb_rrr)
-		inst_rr_both(a, b);
+		if (inst_rr_both(a, b) < 0)
+			return (-1);
 	i = -1;
 	while (++i < ft_abs(inst.nb_rrr - inst.nb_rrb))
-		inst_rr(b);
+		if (inst_rr(b) < 0)
+			return (-1);
 	i = -1;
 	while (++i < ft_abs(inst.nb_rrr - inst.nb_rra))
-		inst_rr(a);
+		if (inst_rr(a) < 0)
+			return (-1);
+	return (0);
 }
 
-void	push_using_rra_rb(t_stack *a, t_stack *b, t_inst inst)
+int	push_using_rra_rb(t_stack *a, t_stack *b, t_inst inst)
 {
 	int	i;
 
 	i = -1;
 	while (++i < inst.nb_rra)
-		inst_rr(a);
+		if (inst_rr(a) < 0)
+			return (-1);
 	i = -1;
 	while (++i < inst.nb_rb)
-		inst_r(b);
+		if (inst_r(b) < 0)
+			return (-1);
+	return (0);
 }
 
-void	push_using_ra_rrb(t_stack *a, t_stack *b, t_inst inst)
+int	push_using_ra_rrb(t_stack *a, t_stack *b, t_inst inst)
 {
 	int	i;
 
 	i = -1;
 	while (++i < inst.nb_ra)
-		inst_r(a);
+		if (inst_r(a) < 0)
+			return (-1);
 	i = -1;
 	while (++i < inst.nb_rrb)
-		inst_rr(b);
+		if (inst_rr(b) < 0)
+			return (-1);
+	return (0);
 }

@@ -13,30 +13,36 @@
 #include "instruction.h"
 #include "sorting.h"
 #include "cost_sort.h"
-#include "cost_sort.h"
 #include "lists_double_circular.h"
 #include "math.h"
 #include "push_swap.h"
 #include "sorting.h"
 
-static void		chose_push(t_stack *a, t_stack *b);
 static t_inst	get_nb_inst(t_stack a, t_stack b, int j);
 static void		calculate_nb_inst(t_inst *ptr_inst);
-static void		push_using(t_stack *a, t_stack *b, t_inst inst);
+static int		chose_push(t_stack *a, t_stack *b);
+static int		push_using(t_stack *a, t_stack *b, t_inst inst);
 
 int	cost_sort(t_stack *a, t_stack *b)
 {
-	push_all_to_b(a, b);
-	sort_three(a);
+	int	check_val;
+
+	check_val = push_all_to_b(a, b);
+	if (check_val < 0)
+		return (check_val);
+	if (sort_three(a) < 0)
+		return (-1);
 	while (b->size > 0)
 	{
-		chose_push(a, b);
+		if (chose_push(a, b) < 0)
+			return (-1);
 	}
-	rotate_to_min(a);
+	if (rotate_to_min(a) < 0)
+		return (-1);
 	return (0);
 }
 
-static void	chose_push(t_stack *a, t_stack *b)
+static int	chose_push(t_stack *a, t_stack *b)
 {
 	int		j;
 	t_inst	inst_tmp;
@@ -53,7 +59,9 @@ static void	chose_push(t_stack *a, t_stack *b)
 		}
 		j++;
 	}
-	push_using(a, b, inst);
+	if (push_using(a, b, inst) < 0)
+		return (-1);
+	return (0);
 }
 
 static t_inst	get_nb_inst(t_stack a, t_stack b, int j)
@@ -107,15 +115,29 @@ static void	calculate_nb_inst(t_inst *ptr_inst)
 	}
 }
 
-static void	push_using(t_stack *a, t_stack *b, t_inst inst)
+static int	push_using(t_stack *a, t_stack *b, t_inst inst)
 {
 	if (inst.type == 1)
-		push_using_ra_rb(a, b, inst);
+	{
+		if (push_using_ra_rb(a, b, inst) < 0)
+			return (-1);
+	}
 	else if (inst.type == 2)
-		push_using_rra_rrb(a, b, inst);
+	{
+		if (push_using_rra_rrb(a, b, inst) < 0)
+			return (-1);
+	}
 	else if (inst.type == 3)
-		push_using_rra_rb(a, b, inst);
+	{
+		if (push_using_rra_rb(a, b, inst) < 0)
+			return (-1);
+	}
 	else if (inst.type == 4)
-		push_using_ra_rrb(a, b, inst);
-	inst_pa(a, b);
+	{
+		if (push_using_ra_rrb(a, b, inst) < 0)
+			return (-1);
+	}
+	if (inst_pa(a, b) < 0)
+		return (-1);
+	return (0);
 }

@@ -15,15 +15,15 @@
 
 # include "lists_double_circular.h"
 
-void	selection_sort(t_stack *a, t_stack *b);
-void	insertion_sort(t_stack *a);
-void	bubble_sort(t_stack *a);
-int		sort_stack(t_stack *a, t_stack *b);
-void	merge_sort(t_stack **stack_array);
-int		indexing(t_stack a);
-int		radix_sort(t_stack *a, t_stack *b);
-int		radix_sort_ternary(t_stack **stacks);
-void	sort_three(t_stack *a);
-int		cost_sort(t_stack *a, t_stack *b);
+int	selection_sort(t_stack *a, t_stack *b);
+int	insertion_sort(t_stack *a);
+int	bubble_sort(t_stack *a);
+int	sort_stack(t_stack *a, t_stack *b);
+int	merge_sort(t_stack **stack_array);
+int	indexing(t_stack a);
+int	radix_sort(t_stack *a, t_stack *b);
+int	radix_sort_ternary(t_stack **stacks);
+int	sort_three(t_stack *a);
+int	cost_sort(t_stack *a, t_stack *b);
 
 #endif

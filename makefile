@@ -33,6 +33,7 @@ SORTING_FILES := sort_stack.c \
 				 insertion_sort.c \
 				 merge_sort.c \
 				 merge_sort_utils.c \
+				 merge_sort_push_case.c \
 				 indexing.c \
 				 radix_sort.c \
 				 radix_sort_ternary.c \
@@ -85,8 +86,7 @@ $(OBJ_DIR)$(SORTING_DIR):
 
 clean:
 	$(MAKE) -C src/libft clean
-	rm -f $(OBJ_FILES)
-	rm -f $(DEP_FILES)
+	rm -rf $(OBJ_DIR)
 
 fclean:
 	$(MAKE) -C src/libft fclean

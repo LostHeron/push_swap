@@ -24,26 +24,32 @@ int	get_val_end(t_stack b)
 	return (((t_pair *)b.head->prev->content)->value);
 }
 
-void	case_size_two(t_stack **stacks, int order)
+int	case_size_two(t_stack **stacks, int order)
 {
 	if (order == -1)
 	{
 		if (((t_pair *)stacks[0]->head->content)->value
 			> ((t_pair *)stacks[0]->head->next->content)->value)
-			inst_s(stacks[0]);
+			if (inst_s(stacks[0]) < 0)
+				return (-1);
 	}
 	else
 	{
 		if (((t_pair *)stacks[0]->head->content)->value
 			< ((t_pair *)stacks[0]->head->next->content)->value)
-			inst_s(stacks[0]);
+			if (inst_s(stacks[0]) < 0)
+				return (-1);
 	}
+	return (0);
 }
 
-void	pa_at_end(t_stack **stacks)
+int	pa_at_end(t_stack **stacks)
 {
-	inst_rr(stacks[1]);
-	inst_pa(stacks[0], stacks[1]);
+	if (inst_rr(stacks[1]) < 0)
+		return (-1);
+	if (inst_pa(stacks[0], stacks[1]) < 0)
+		return (-1);
+	return (0);
 }
 
 int	get_middle(int start, int end)
