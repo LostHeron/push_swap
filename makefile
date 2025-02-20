@@ -17,17 +17,19 @@ PARSING_FILES := ft_atoi_err.c \
 				 parsing.c \
 				
 INSTRUCTION_DIR := src/instruction/
-INSTRUCTION_FILES :=  inst_pa.c \
+INSTRUCTION_FILES :=  inst_s.c \
+					  inst_s_both.c \
+					  inst_pa.c \
 					  inst_pb.c \
 					  inst_r.c \
 					  inst_r_both.c \
 					  inst_rr.c \
 					  inst_rr_both.c \
-					  inst_s.c \
 
 SORTING_DIR := src/sorting_algorithm/
 SORTING_FILES := sort_stack.c \
 				 sort_three.c \
+				 check_sorted.c \
 				 selection_sort.c \
 				 bubble_sort.c \
 				 insertion_sort.c \
@@ -41,6 +43,9 @@ SORTING_FILES := sort_stack.c \
 				 cost_sort_utils.c \
 				 cost_sort_pushs.c \
 
+CHECKER_DIR := src/checker_bonus/
+CHECKER_FILES := checker_utils_bonus.c \
+
 
 FILES_INCLUDES := includes/
 C_FILES := $(NAME).c \
@@ -48,13 +53,24 @@ C_FILES := $(NAME).c \
 		   $(addprefix $(PARSING_DIR), $(PARSING_FILES)) \
 		   $(addprefix $(INSTRUCTION_DIR), $(INSTRUCTION_FILES)) \
 		   $(addprefix $(SORTING_DIR), $(SORTING_FILES)) \
-		   $(addprefix $(LISTS_UTILS_DIR), $(LISTS_UTILS_FILES)) \
 
 OBJ_DIR := .obj/
 OBJ_FILES := $(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
 DEP_FILES := $(OBJ_FILES:.o=.d)
 
-.PHONY: all clean fclean re exec
+
+NAME_BONUS := checker
+C_FILES_BONUS := checker_bonus.c \
+				 $(addprefix $(PRINT_DIR), $(PRINT_FILES)) \
+		   		 $(addprefix $(PARSING_DIR), $(PARSING_FILES)) \
+		   		 $(addprefix $(INSTRUCTION_DIR), $(INSTRUCTION_FILES)) \
+		   		 $(addprefix $(SORTING_DIR), $(SORTING_FILES)) \
+				 $(addprefix $(CHECKER_DIR), $(CHECKER_FILES)) \
+
+OBJ_DIR_BONUS := $(OBJ_DIR)
+OBJ_FILES_BONUS := $(addprefix $(OBJ_DIR_BONUS), $(C_FILES_BONUS:.c=.o))
+
+.PHONY: all clean fclean re bonus exec
 
 all: git makelibft $(NAME)
 
@@ -67,10 +83,16 @@ git:
 $(NAME): $(OBJ_FILES) $(LIBFT)
 	$(CC) $(CFLAGS) -I $(FILES_INCLUDES) -I $(LIBFT_INCLUDES) $^ $(LIBFT) -o $@ 
 
+bonus: git makelibft $(NAME_BONUS)
+	
+$(NAME_BONUS): $(OBJ_FILES_BONUS) $(LIBFT)
+	$(CC) $(CFLAGS) -I $(FILES_INCLUDES) -I $(LIBFT_INCLUDES) $^ $(LIBFT) -o $@ 
+
 -include $(DEP_FILES)
 
-$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)$(PRINT_DIR) $(OBJ_DIR)$(PARSING_DIR) $(OBJ_DIR)$(INSTRUCTION_DIR) $(OBJ_DIR)$(SORTING_DIR)
+$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)$(PRINT_DIR) $(OBJ_DIR)$(PARSING_DIR) $(OBJ_DIR)$(INSTRUCTION_DIR) $(OBJ_DIR)$(SORTING_DIR) $(OBJ_DIR)$(CHECKER_DIR)
 	$(CC) $(CFLAGS) -MMD -MP -c -I $(FILES_INCLUDES) -I $(LIBFT_INCLUDES) $< -o $@
+
 
 $(OBJ_DIR)$(PARSING_DIR):
 	mkdir -p $@
@@ -84,6 +106,9 @@ $(OBJ_DIR)$(PRINT_DIR):
 $(OBJ_DIR)$(SORTING_DIR):
 	mkdir -p $@
 
+$(OBJ_DIR)$(CHECKER_DIR):
+	mkdir -p $@
+
 clean:
 	$(MAKE) -C src/libft clean
 	rm -rf $(OBJ_DIR)
@@ -92,10 +117,12 @@ fclean:
 	$(MAKE) -C src/libft fclean
 	$(MAKE) clean
 	rm -f $(NAME)
+	rm -f $(NAME_BONUS)
 
 re:
 	$(MAKE) fclean
 	$(MAKE) all
+
 
 exec: 
 	./$(NAME) 50 50

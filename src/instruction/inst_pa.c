@@ -12,9 +12,10 @@
 
 #include "lists_double_circular.h"
 #include "io.h"
+#include "instruction.h"
 #include <stdlib.h>
 
-int	inst_pa(t_stack *pa, t_stack *pb)
+int	inst_pa(t_stack *pa, t_stack *pb, int display)
 {
 	t_node	*tmp;
 
@@ -22,7 +23,8 @@ int	inst_pa(t_stack *pa, t_stack *pb)
 	if (tmp == NULL)
 		return (0);
 	ft_dc_stack_add(pa, tmp);
-	if (ft_printf_fd(1, "pa\n") < 0)
-		return (-1);
+	if (display == DISPLAY)
+		if (ft_printf_fd(1, "pa\n") < 0)
+			return (-1);
 	return (0);
 }

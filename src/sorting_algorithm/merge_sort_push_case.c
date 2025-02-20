@@ -22,7 +22,7 @@ int	push_case(t_stack **stacks, int *middle, t_pos pos, int order)
 {
 	if (pos.end < *middle)
 	{
-		if (inst_pa(stacks[0], stacks[1]) < 0)
+		if (inst_pa(stacks[0], stacks[1], DISPLAY) < 0)
 			return (-1);
 		(*middle)--;
 	}
@@ -59,7 +59,7 @@ static int	pa_ord_neg(t_stack **stacks, int *p_mid, int val_start, int val_end)
 {
 	if (val_start > val_end)
 	{
-		if (inst_pa(stacks[0], stacks[1]) < 0)
+		if (inst_pa(stacks[0], stacks[1], DISPLAY) < 0)
 			return (-1);
 		(*p_mid)--;
 	}
@@ -78,7 +78,7 @@ static int	pa_ord_pos(t_stack **stacks, int *p_mid, int val_start, int val_end)
 	}
 	else
 	{
-		if (inst_pa(stacks[0], stacks[1]) < 0)
+		if (inst_pa(stacks[0], stacks[1], DISPLAY) < 0)
 			return (-1);
 		(*p_mid)--;
 	}

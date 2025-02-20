@@ -54,14 +54,14 @@ static int	push_zeros_ones(t_stack **stacks, int i)
 	j = -1;
 	while (++j < nb_pushed_down)
 	{
-		if (inst_rr(stacks[1]) < 0)
+		if (inst_rr(stacks[1], DISPLAY) < 0)
 			return (-1);
-		if (inst_pa(stacks[0], stacks[1]) < 0)
+		if (inst_pa(stacks[0], stacks[1], DISPLAY) < 0)
 			return (-1);
 	}
 	j = -1;
 	while (++j < nb_pushed_up)
-		if (inst_pa(stacks[0], stacks[1]) < 0)
+		if (inst_pa(stacks[0], stacks[1], DISPLAY) < 0)
 			return (-1);
 	return (0);
 }
@@ -75,20 +75,20 @@ static int	chose_case(t_stack **stacks, int i,
 	tmp_index = tmp_index / ft_power(3, i);
 	if (tmp_index % 3 == 0)
 	{
-		if (inst_pb(stacks[0], stacks[1]) < 0)
+		if (inst_pb(stacks[0], stacks[1], DISPLAY) < 0)
 			return (-1);
 		(*nb_push_up)++;
 	}
 	else if (tmp_index % 3 == 1)
 	{
-		if (inst_pb(stacks[0], stacks[1]) < 0)
+		if (inst_pb(stacks[0], stacks[1], DISPLAY) < 0)
 			return (-1);
-		if (inst_r(stacks[1]) < 0)
+		if (inst_r(stacks[1], DISPLAY) < 0)
 			return (-1);
 		(*nb_push_down)++;
 	}
 	else if (tmp_index % 3 == 2)
-		if (inst_r(stacks[0]) < 0)
+		if (inst_r(stacks[0], DISPLAY) < 0)
 			return (-1);
 	return (0);
 }

@@ -33,7 +33,7 @@ int	bubble_sort(t_stack *a)
 				return (-1);
 			j++;
 		}
-		if (inst_r(a) < 0)
+		if (inst_r(a, DISPLAY) < 0)
 			return (-1);
 		if (rotation == 0)
 			break ;
@@ -48,10 +48,10 @@ static int	chose_swap(t_stack *a, int *rotation)
 		> ((t_pair *)a->head->next->content)->value)
 	{
 		*rotation = 1;
-		if (inst_s(a) < 0)
+		if (inst_s(a, DISPLAY) < 0)
 			return (-1);
 	}
-	if (inst_r(a) < 0)
+	if (inst_r(a, DISPLAY) < 0)
 		return (-1);
 	return (0);
 }

@@ -49,18 +49,18 @@ static int	push_zeros(t_stack *a, t_stack *b, int i)
 	{
 		if ((((t_pair *)a->head->content)->index & (1 << i)) == 0)
 		{
-			if (inst_pb(a, b) < 0)
+			if (inst_pb(a, b, DISPLAY) < 0)
 				return (-1);
 			nb_pushed++;
 		}
 		else
-			if (inst_r(a) < 0)
+			if (inst_r(a, DISPLAY) < 0)
 				return (-1);
 		j++;
 	}
 	j = -1;
 	while (++j < nb_pushed)
-		if (inst_pa(a, b) < 0)
+		if (inst_pa(a, b, DISPLAY) < 0)
 			return (-1);
 	return (0);
 }

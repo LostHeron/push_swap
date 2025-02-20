@@ -12,14 +12,17 @@
 
 #include "lists_double_circular.h"
 #include "io.h"
+#include "instruction.h"
 
-int	inst_s(t_stack *a)
+int	inst_s(t_stack *a, int display)
 {
 	t_node	*tmp_prev;
 	t_node	*tmp_next_next;
 	t_node	*old_head;
 	t_node	*old_next;
 
+	if (a->size == 0)
+		return (0);
 	tmp_prev = a->head->prev;
 	tmp_next_next = a->head->next->next;
 	old_head = a->head;
@@ -31,7 +34,8 @@ int	inst_s(t_stack *a)
 	old_next->prev = tmp_prev;
 	old_head->prev = old_next;
 	old_head->next = tmp_next_next;
-	if (ft_printf_fd(1, "s%s\n", a->name) < 0)
-		return (-1);
+	if (display == DISPLAY)
+		if (ft_printf_fd(1, "s%s\n", a->name) < 0)
+			return (-1);
 	return (0);
 }

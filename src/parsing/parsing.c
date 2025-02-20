@@ -14,7 +14,6 @@
 #include "parsing.h"
 #include "standard.h"
 #include "push_swap.h"
-#include "io.h"
 #define WHITE_SPACES " \t\n\v\f\r"
 
 static int	add_values_stack(t_stack *pa, char **values);

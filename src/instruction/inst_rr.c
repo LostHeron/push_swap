@@ -12,14 +12,16 @@
 
 #include "lists_double_circular.h"
 #include "io.h"
+#include "instruction.h"
 #include <stdlib.h>
 
-int	inst_rr(t_stack *a)
+int	inst_rr(t_stack *a, int display)
 {
 	if (a->head == NULL)
 		return (0);
 	a->head = a->head->prev;
-	if (ft_printf_fd(1, "rr%s\n", a->name) < 0)
-		return (-1);
+	if (display == DISPLAY)
+		if (ft_printf_fd(1, "rr%s\n", a->name) < 0)
+			return (-1);
 	return (0);
 }

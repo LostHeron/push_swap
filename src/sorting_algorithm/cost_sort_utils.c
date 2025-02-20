@@ -29,14 +29,14 @@ int	push_all_to_b(t_stack *a, t_stack *b)
 	{
 		if (((t_pair *)a->head->content)->index > middle)
 		{
-			if (inst_pb(a, b) < 0)
+			if (inst_pb(a, b, DISPLAY) < 0)
 				return (-1);
 		}
 		else
 		{
-			if (inst_pb(a, b) < 0)
+			if (inst_pb(a, b, DISPLAY) < 0)
 				return (-1);
-			if (inst_r(b) < 0)
+			if (inst_r(b, DISPLAY) < 0)
 				return (-1);
 		}
 	}
@@ -117,12 +117,12 @@ static int	chose_side(t_stack *a, int nb_rotate)
 	if (nb_rotate > a->size / 2)
 	{
 		while (++i < a->size - nb_rotate)
-			if (inst_rr(a) < 0)
+			if (inst_rr(a, DISPLAY) < 0)
 				return (-1);
 	}
 	else
 		while (++i < nb_rotate)
-			if (inst_r(a) < 0)
+			if (inst_r(a, DISPLAY) < 0)
 				return (-1);
 	return (0);
 }

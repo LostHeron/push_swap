@@ -65,7 +65,7 @@ static int	merge_sort_sort(t_stack **stacks, int *c_pos, t_pos pos, int order)
 	{
 		counter = -1;
 		while (pos.start + ++counter < pos.end)
-			if (inst_pb(stacks[0], stacks[1]) < 0)
+			if (inst_pb(stacks[0], stacks[1], DISPLAY) < 0)
 				return (-1);
 		if (pushing_back(stacks, pos, order) < 0)
 			return (-1);
@@ -80,7 +80,7 @@ static int	rotate_to_start(t_stack **stacks, int *c_pos, t_pos pos)
 	{
 		while (*c_pos % (stacks[0]->size) != pos.start)
 		{
-			if (inst_r(stacks[0]) < 0)
+			if (inst_r(stacks[0], DISPLAY) < 0)
 				return (-1);
 			(*c_pos)++;
 		}
@@ -89,7 +89,7 @@ static int	rotate_to_start(t_stack **stacks, int *c_pos, t_pos pos)
 	{
 		while (*c_pos % (stacks[0]->size) != pos.start)
 		{
-			if (inst_rr(stacks[0]) < 0)
+			if (inst_rr(stacks[0], DISPLAY) < 0)
 				return (-1);
 			(*c_pos)--;
 		}
@@ -116,7 +116,7 @@ static int	pushing_back(t_stack **stacks, t_pos pos, int order)
 		pos.end--;
 		i++;
 	}
-	if (inst_pa(stacks[0], stacks[1]) < 0)
+	if (inst_pa(stacks[0], stacks[1], DISPLAY) < 0)
 		return (-1);
 	return (0);
 }

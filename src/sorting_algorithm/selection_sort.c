@@ -31,16 +31,16 @@ int	selection_sort(t_stack *a, t_stack *b)
 		j = 0;
 		while (j < min_index)
 		{
-			if (inst_r(a) < 0)
+			if (inst_r(a, DISPLAY) < 0)
 				return (-1);
 			j++;
 		}
-		if (inst_pb(a, b) < 0)
+		if (inst_pb(a, b, DISPLAY) < 0)
 			return (-1);
 	}
 	i = -1;
 	while (++i < nb_elems)
-		if (inst_pa(a, b) < 0)
+		if (inst_pa(a, b, DISPLAY) < 0)
 			return (-1);
 	return (0);
 }

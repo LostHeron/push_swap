@@ -13,14 +13,18 @@
 #ifndef INSTRUCTION_H
 # define INSTRUCTION_H
 
+# define DISPLAY 1
+# define NO_DISPLAY 2
+
 # include "lists_double_circular.h"
 
-int	inst_s(t_stack *a);
-int	inst_pb(t_stack *pa, t_stack *pb);
-int	inst_pa(t_stack *pa, t_stack *pb);
-int	inst_r(t_stack *a);
-int	inst_r_both(t_stack *a, t_stack *b);
-int	inst_rr(t_stack *a);
-int	inst_rr_both(t_stack *a, t_stack *b);
+int	inst_s(t_stack *a, int display);
+int	inst_s_both(t_stack *a, t_stack *b, int display);
+int	inst_pb(t_stack *pa, t_stack *pb, int display);
+int	inst_pa(t_stack *pa, t_stack *pb, int display);
+int	inst_r(t_stack *a, int display);
+int	inst_r_both(t_stack *a, t_stack *b, int display);
+int	inst_rr(t_stack *a, int display);
+int	inst_rr_both(t_stack *a, t_stack *b, int display);
 
 #endif

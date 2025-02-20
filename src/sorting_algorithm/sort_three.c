@@ -43,17 +43,17 @@ static int	case_nb1_greater_nb3(t_stack *a, int nb1, int nb2, int nb3)
 	{
 		if (nb2 > nb3)
 		{
-			if (inst_s(a) < 0)
+			if (inst_s(a, DISPLAY) < 0)
 				return (-1);
-			if (inst_rr(a) < 0)
+			if (inst_rr(a, DISPLAY) < 0)
 				return (-1);
 		}
 		else
-			if (inst_r(a) < 0)
+			if (inst_r(a, DISPLAY) < 0)
 				return (-1);
 	}
 	else
-		if (inst_rr(a) < 0)
+		if (inst_rr(a, DISPLAY) < 0)
 			return (-1);
 	return (0);
 }
@@ -64,14 +64,14 @@ static int	case_nb1_lower_nb3(t_stack *a, int nb1, int nb2, int nb3)
 	{
 		if (nb2 > nb3)
 		{
-			if (inst_rr(a) < 0)
+			if (inst_rr(a, DISPLAY) < 0)
 				return (-1);
-			if (inst_s(a) < 0)
+			if (inst_s(a, DISPLAY) < 0)
 				return (-1);
 		}
 	}
 	else
-		if (inst_s(a) < 0)
+		if (inst_s(a, DISPLAY) < 0)
 			return (-1);
 	return (0);
 }

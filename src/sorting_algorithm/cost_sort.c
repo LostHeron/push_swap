@@ -137,7 +137,7 @@ static int	push_using(t_stack *a, t_stack *b, t_inst inst)
 		if (push_using_ra_rrb(a, b, inst) < 0)
 			return (-1);
 	}
-	if (inst_pa(a, b) < 0)
+	if (inst_pa(a, b, DISPLAY) < 0)
 		return (-1);
 	return (0);
 }

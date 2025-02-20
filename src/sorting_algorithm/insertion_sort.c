@@ -31,7 +31,7 @@ int	insertion_sort(t_stack *a)
 		}
 		else
 		{
-			if (inst_r(a) < 0)
+			if (inst_r(a, DISPLAY) < 0)
 				return (-1);
 			i++;
 		}
@@ -50,7 +50,7 @@ static int	rr_while_possible(t_stack *a, int *i)
 	}
 	else
 	{
-		if (inst_r(a) < 0)
+		if (inst_r(a, DISPLAY) < 0)
 			return (-1);
 		(*i)++;
 	}
@@ -59,9 +59,9 @@ static int	rr_while_possible(t_stack *a, int *i)
 
 static int	rr_and_s(t_stack *a)
 {
-	if (inst_rr(a) < 0)
+	if (inst_rr(a, DISPLAY) < 0)
 		return (-1);
-	if (inst_s(a) < 0)
+	if (inst_s(a, DISPLAY) < 0)
 		return (-1);
 	return (0);
 }

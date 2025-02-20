@@ -8,3 +8,5 @@ push_swap_visualizer/
 *.log
 log
 complexity/
+checker_OS
+checker
