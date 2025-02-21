@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inst_r.c                                           :+:      :+:    :+:   */
+/*   inst_rra.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 14:23:01 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/18 17:46:39 by jweber           ###   ########.fr       */
+/*   Created: 2025/02/17 14:26:12 by jweber            #+#    #+#             */
+/*   Updated: 2025/02/21 11:00:45 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include "instruction.h"
 #include <stdlib.h>
 
-int	inst_r(t_stack *a, int display)
+int	inst_rra(t_stack **stacks, int display)
 {
-	if (a->head == NULL)
+	if (stacks[STACK_A]->head == NULL)
 		return (0);
-	a->head = a->head->next;
+	stacks[STACK_A]->head = stacks[STACK_A]->head->prev;
 	if (display == DISPLAY)
-		if (ft_printf_fd(1, "r%s\n", a->name) < 0)
+		if (ft_printf_fd(1, "rra\n") < 0)
 			return (-1);
 	return (0);
 }
