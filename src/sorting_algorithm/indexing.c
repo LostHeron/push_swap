@@ -12,6 +12,7 @@
 
 #include "lists_double_circular.h"
 #include "push_swap.h"
+#include "standard.h"
 #include <stdlib.h>
 
 static void	sort_array(t_node **node_array, int nb_elems);
@@ -21,7 +22,7 @@ int	indexing(t_stack a)
 	int		i;
 	t_node	**node_array;
 
-	node_array = malloc(a.size * sizeof(t_node *));
+	node_array = ft_malloc(a.size * sizeof(t_node *));
 	if (node_array == NULL)
 		return (-3);
 	i = 0;

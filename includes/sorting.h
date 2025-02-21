@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:36:13 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 11:52:20 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/21 13:43:35 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 int	check_sorted(t_stack a);
 int	indexing(t_stack a);
 int	sort_three(t_stack **stacks);
-int	sort_stack(t_stack **stacks);
 int	selection_sort(t_stack **stacks);
 int	bubble_sort(t_stack **stacks);
 int	insertion_sort(t_stack **stacks);

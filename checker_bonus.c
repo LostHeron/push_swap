@@ -6,102 +6,83 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:40:54 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/20 18:45:52 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/21 14:45:52 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "io.h"
+#include "printing.h"
 #include "lists_double_circular.h"
 #include "parsing.h"
 #include "string.h"
 #include "sorting.h"
 #include "checker_bonus.h"
+#include "instruction.h"
 #include <stdlib.h>
 #include <unistd.h>
 
 static void		*my_free(void *content);
-static t_stack	read_instruction(void);
 static int		free_stacks(t_stack *ptr_a, t_stack *ptr_b, t_stack *ptr_inst);
+static void		init_stacks(t_stack **stacks);
+static int		check_push_swap(t_stack **stacks);
 
 int	main(int argc, char **argv)
 {
 	t_stack	a;
 	t_stack	b;
-	t_stack	inst_stack;
+	t_stack	*stacks[2];
 
-	a.head = NULL;
-	a.name = "a";
-	a.size = 0;
-	b.head = NULL;
-	b.name = "b";
-	b.size = 0;
+	stacks[STACK_A] = &a;
+	stacks[STACK_B] = &b;
+	init_stacks(stacks);
 	if (argc <= 1)
 		return (0);
 	if (parse_input(&a, argc - 1, argv + 1) != 0)
 	{
-		ft_printf_fd(2, "Error\n");
-		return (free_stacks(&a, &b, &inst_stack));
+		print_error();
+		return (free_stacks(&a, &b, NULL));
 	}
-	inst_stack = read_instruction();
-	if (inst_stack.size < 0)
+	return (check_push_swap(stacks));
+}
+
+static int	check_push_swap(t_stack **stacks)
+{
+	t_stack	inst_stack;
+	int		err_code;
+
+	inst_stack = read_instruction(&err_code);
+	if (err_code < 0)
 	{
-		ft_printf_fd(2, "Error\n");
-		return (free_stacks(&a, &b, &inst_stack));
+		print_error();
+		return (free_stacks(stacks[STACK_A], stacks[STACK_B], &inst_stack));
 	}
-	if (exec_inst(&a, &b, inst_stack) < 0)
+	if (exec_inst(stacks, inst_stack) < 0)
 	{
-		ft_printf_fd(2, "Error\n");
-		return (free_stacks(&a, &b, &inst_stack));
+		print_error();
+		return (free_stacks(stacks[STACK_A], stacks[STACK_B], &inst_stack));
 	}
-	if (b.size == 0)
+	if (stacks[STACK_B]->size == 0)
 	{
-		if (check_sorted(a) == 0)
+		if (check_sorted(*stacks[STACK_A]) == 0)
 			ft_printf_fd(1, "OK\n");
 		else
 			ft_printf_fd(1, "KO\n");
 	}
 	else
 		ft_printf_fd(1, "KO\n");
-	free_stacks(&a, &b, &inst_stack);
+	free_stacks(stacks[STACK_A], stacks[STACK_B], &inst_stack);
 	return (0);
 }
 
-static t_stack	read_instruction(void)
+static void	init_stacks(t_stack **stacks)
 {
-	int		err_code;
-	char	*line;
-	t_node	*node_tmp;
-	t_stack	inst;
-
-	inst.head = NULL;
-	inst.size = 0;
-	inst.name = "inst";
-	line = get_next_line(0, &err_code);
-	if (err_code < 0)
-	{
-		inst.size = -1;
-		return (inst);
-	}
-	while (line != NULL)
-	{
-		node_tmp = ft_dc_node_new(line);
-		if (node_tmp == NULL)
-		{
-			free(line);
-			inst.size = -1;
-			return (inst);
-		}
-		ft_dc_stack_add_back(&inst, node_tmp);
-		line = get_next_line(0, &err_code);
-		if (err_code < 0)
-		{
-			inst.size = -1;
-			return (inst);
-		}
-	}
-	return (inst);
+	stacks[STACK_A]->head = NULL;
+	stacks[STACK_A]->name = "a";
+	stacks[STACK_A]->size = 0;
+	stacks[STACK_B]->head = NULL;
+	stacks[STACK_B]->name = "b";
+	stacks[STACK_B]->size = 0;
 }
-
 
 static int	free_stacks(t_stack *ptr_a, t_stack *ptr_b, t_stack *ptr_inst)
 {

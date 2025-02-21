@@ -55,7 +55,7 @@ static int	add_values_stack(t_stack *pa, char **values)
 	val_i = 0;
 	while (values[val_i] != NULL)
 	{
-		tmp = malloc(1 * sizeof(t_pair));
+		tmp = ft_malloc(1 * sizeof(t_pair));
 		if (tmp == NULL)
 			return (1);
 		if (ft_atoi_err(&(tmp->value), values[val_i]) != 0)

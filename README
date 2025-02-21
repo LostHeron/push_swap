@@ -1,4 +1,3 @@
 Error code of the program :
 -1 -> write faile
--2 -> instruction error
 -3 -> malloc fail allocation

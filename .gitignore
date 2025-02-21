@@ -10,3 +10,5 @@ log
 complexity/
 checker_OS
 checker
+*.txt
+script_test_malloc.sh

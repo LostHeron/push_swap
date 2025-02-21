@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_bonus.h                                    :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 18:42:58 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 13:49:09 by jweber           ###   ########.fr       */
+/*   Created: 2025/02/21 13:39:59 by jweber            #+#    #+#             */
+/*   Updated: 2025/02/21 13:40:36 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_BONUS_H
-# define CHECKER_BONUS_H
+#include "io.h"
 
-# include "lists_double_circular.h"
-
-t_stack	read_instruction(int *p_err_code);
-int		check_inst(char *inst_i);
-int		exec_inst(t_stack **stacks, t_stack inst);
-
-#endif
+void	print_error(void)
+{
+	ft_printf_fd(2, "Error\n");
+}

@@ -6,14 +6,13 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:49:25 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 11:49:54 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/21 13:42:08 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "instruction.h"
 #include "lists_double_circular.h"
-#include "io.h"
 #include "printing.h"
 #include "parsing.h"
 #include "sorting.h"
@@ -38,16 +37,12 @@ int	main(int argc, char **argv)
 	if (parse_input(&a, argc - 1, argv + 1) != 0)
 	{
 		ft_dc_stack_clear(&a, &my_free);
-		ft_printf_fd(2, "Error\n");
+		print_error();
 		return (1);
 	}
 	if (check_sorted(a) == 0)
 		return (0);
-	ft_printf_fd(1, "stack avant sort :\n");
-	print_stacks(a, b);
-	sort_stack(stacks);
-	ft_printf_fd(1, "stack avant sort :\n");
-	print_stacks(a, b);
+	cost_sort(stacks);
 	ft_dc_stack_clear(&a, &my_free);
 	ft_dc_stack_clear(&b, &my_free);
 }

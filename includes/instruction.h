@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:45:19 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 11:11:36 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/21 12:53:41 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef enum e_stack_name
 
 typedef enum e_inst_type
 {
-	INST_SA,
+	INST_SA = 0,
 	INST_SB,
 	INST_SS,
 	INST_PA,

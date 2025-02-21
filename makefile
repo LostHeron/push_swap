@@ -11,6 +11,7 @@ PRINT_DIR := src/printing/
 PRINT_FILES := print_stacks.c \
 			   print_stacks_horizontal.c \
 			   print_stacks_index.c \
+			   print_error.c \
 
 PARSING_DIR := src/parsing/
 PARSING_FILES := ft_atoi_err.c \
@@ -30,8 +31,7 @@ INSTRUCTION_FILES :=  inst_sa.c \
 					  inst_rrr.c \
 
 SORTING_DIR := src/sorting_algorithm/
-SORTING_FILES := sort_stack.c \
-				 sort_three.c \
+SORTING_FILES := sort_three.c \
 				 check_sorted.c \
 				 selection_sort.c \
 				 bubble_sort.c \
@@ -49,6 +49,7 @@ SORTING_FILES := sort_stack.c \
 CHECKER_DIR := src/checker_bonus/
 CHECKER_FILES := checker_exec_inst_bonus.c \
 				 checker_check_inst_bonus.c \
+				 read_instruction_bonus.c \
 
 
 FILES_INCLUDES := includes/
