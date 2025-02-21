@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:43:48 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/18 17:12:00 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/21 11:33:44 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@
 #include "math.h"
 #include "sorting.h"
 
-static int	chose_side(t_stack *a, int nb_rotate);
+static int	chose_side(t_stack **stacks, int nb_rotate);
 
-int	push_all_to_b(t_stack *a, t_stack *b)
+int	push_all_to_b(t_stack **stacks)
 {
 	int	middle;
 
-	middle = a->size / 2;
-	if (indexing(*a) < 0)
+	middle = stacks[STACK_A]->size / 2;
+	if (indexing(*stacks[STACK_A]) < 0)
 		return (-3);
-	while (a->size > 3)
+	while (stacks[STACK_A]->size > 3)
 	{
-		if (((t_pair *)a->head->content)->index > middle)
+		if (((t_pair *)stacks[STACK_A]->head->content)->index > middle)
 		{
-			if (inst_pb(a, b, DISPLAY) < 0)
+			if (inst_pb(stacks, DISPLAY) < 0)
 				return (-1);
 		}
 		else
 		{
-			if (inst_pb(a, b, DISPLAY) < 0)
+			if (inst_pb(stacks, DISPLAY) < 0)
 				return (-1);
-			if (inst_r(b, DISPLAY) < 0)
+			if (inst_rb(stacks, DISPLAY) < 0)
 				return (-1);
 		}
 	}
@@ -84,18 +84,18 @@ int	get_ra(t_stack a, int val_b)
 		return (count_ra + 1);
 }
 
-int	rotate_to_min(t_stack *a)
+int	rotate_to_min(t_stack **stacks)
 {
 	int		i;
 	int		nb_rotate;
 	int		min;
 	t_node	*tmp;
 
-	tmp = a->head;
+	tmp = stacks[STACK_A]->head;
 	i = -1;
-	min = ((t_pair *)a->head->content)->value;
+	min = ((t_pair *)stacks[STACK_A]->head->content)->value;
 	nb_rotate = 0;
-	while (++i < a->size)
+	while (++i < stacks[STACK_A]->size)
 	{
 		if (((t_pair *)tmp->content)->value < min)
 		{
@@ -104,25 +104,25 @@ int	rotate_to_min(t_stack *a)
 		}
 		tmp = tmp->next;
 	}
-	if (chose_side(a, nb_rotate) < 0)
+	if (chose_side(stacks, nb_rotate) < 0)
 		return (-1);
 	return (0);
 }
 
-static int	chose_side(t_stack *a, int nb_rotate)
+static int	chose_side(t_stack **stacks, int nb_rotate)
 {
-	int	i;
+	int		i;
 
 	i = -1;
-	if (nb_rotate > a->size / 2)
+	if (nb_rotate > stacks[STACK_A]->size / 2)
 	{
-		while (++i < a->size - nb_rotate)
-			if (inst_rr(a, DISPLAY) < 0)
+		while (++i < stacks[STACK_A]->size - nb_rotate)
+			if (inst_rra(stacks, DISPLAY) < 0)
 				return (-1);
 	}
 	else
 		while (++i < nb_rotate)
-			if (inst_r(a, DISPLAY) < 0)
+			if (inst_ra(stacks, DISPLAY) < 0)
 				return (-1);
 	return (0);
 }

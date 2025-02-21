@@ -17,14 +17,17 @@ PARSING_FILES := ft_atoi_err.c \
 				 parsing.c \
 				
 INSTRUCTION_DIR := src/instruction/
-INSTRUCTION_FILES :=  inst_s.c \
-					  inst_s_both.c \
+INSTRUCTION_FILES :=  inst_sa.c \
+					  inst_sb.c \
+					  inst_ss.c \
 					  inst_pa.c \
 					  inst_pb.c \
-					  inst_r.c \
-					  inst_r_both.c \
+					  inst_ra.c \
+					  inst_rb.c \
 					  inst_rr.c \
-					  inst_rr_both.c \
+					  inst_rra.c \
+					  inst_rrb.c \
+					  inst_rrr.c \
 
 SORTING_DIR := src/sorting_algorithm/
 SORTING_FILES := sort_stack.c \
@@ -44,7 +47,8 @@ SORTING_FILES := sort_stack.c \
 				 cost_sort_pushs.c \
 
 CHECKER_DIR := src/checker_bonus/
-CHECKER_FILES := checker_utils_bonus.c \
+CHECKER_FILES := checker_exec_inst_bonus.c \
+				 checker_check_inst_bonus.c \
 
 
 FILES_INCLUDES := includes/

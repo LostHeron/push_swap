@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:53:30 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/14 12:18:22 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/21 11:47:08 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int	case_size_two(t_stack **stacks, int order)
 	{
 		if (((t_pair *)stacks[0]->head->content)->value
 			> ((t_pair *)stacks[0]->head->next->content)->value)
-			if (inst_s(stacks[0], DISPLAY) < 0)
+			if (inst_sa(stacks, DISPLAY) < 0)
 				return (-1);
 	}
 	else
 	{
 		if (((t_pair *)stacks[0]->head->content)->value
 			< ((t_pair *)stacks[0]->head->next->content)->value)
-			if (inst_s(stacks[0], DISPLAY) < 0)
+			if (inst_sa(stacks, DISPLAY) < 0)
 				return (-1);
 	}
 	return (0);
@@ -45,9 +45,9 @@ int	case_size_two(t_stack **stacks, int order)
 
 int	pa_at_end(t_stack **stacks)
 {
-	if (inst_rr(stacks[1], DISPLAY) < 0)
+	if (inst_rrb(stacks, DISPLAY) < 0)
 		return (-1);
-	if (inst_pa(stacks[0], stacks[1], DISPLAY) < 0)
+	if (inst_pa(stacks, DISPLAY) < 0)
 		return (-1);
 	return (0);
 }

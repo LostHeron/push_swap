@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:04:21 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/18 18:26:30 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/21 11:41:22 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int	get_min_index(t_stack a);
 
-int	selection_sort(t_stack *a, t_stack *b)
+int	selection_sort(t_stack **stacks)
 {
 	int		i;
 	int		j;
@@ -24,23 +24,23 @@ int	selection_sort(t_stack *a, t_stack *b)
 	int		min_index;
 
 	i = -1;
-	nb_elems = a->size;
+	nb_elems = stacks[STACK_A]->size;
 	while (++i < nb_elems)
 	{
-		min_index = get_min_index(*a);
+		min_index = get_min_index(*stacks[STACK_A]);
 		j = 0;
 		while (j < min_index)
 		{
-			if (inst_r(a, DISPLAY) < 0)
+			if (inst_ra(stacks, DISPLAY) < 0)
 				return (-1);
 			j++;
 		}
-		if (inst_pb(a, b, DISPLAY) < 0)
+		if (inst_pb(stacks, DISPLAY) < 0)
 			return (-1);
 	}
 	i = -1;
 	while (++i < nb_elems)
-		if (inst_pa(a, b, DISPLAY) < 0)
+		if (inst_pa(stacks, DISPLAY) < 0)
 			return (-1);
 	return (0);
 }

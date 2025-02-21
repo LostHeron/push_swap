@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:44:46 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/18 17:12:28 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/21 11:29:00 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,46 +20,46 @@
 
 static t_inst	get_nb_inst(t_stack a, t_stack b, int j);
 static void		calculate_nb_inst(t_inst *ptr_inst);
-static int		chose_push(t_stack *a, t_stack *b);
-static int		push_using(t_stack *a, t_stack *b, t_inst inst);
+static int		chose_push(t_stack **stacks);
+static int		push_using(t_stack **stacks, t_inst inst);
 
-int	cost_sort(t_stack *a, t_stack *b)
+int	cost_sort(t_stack **stacks)
 {
 	int	check_val;
 
-	check_val = push_all_to_b(a, b);
+	check_val = push_all_to_b(stacks);
 	if (check_val < 0)
 		return (check_val);
-	if (sort_three(a) < 0)
+	if (sort_three(stacks) < 0)
 		return (-1);
-	while (b->size > 0)
+	while (stacks[STACK_B]->size > 0)
 	{
-		if (chose_push(a, b) < 0)
+		if (chose_push(stacks) < 0)
 			return (-1);
 	}
-	if (rotate_to_min(a) < 0)
+	if (rotate_to_min(stacks) < 0)
 		return (-1);
 	return (0);
 }
 
-static int	chose_push(t_stack *a, t_stack *b)
+static int	chose_push(t_stack **stacks)
 {
 	int		j;
 	t_inst	inst_tmp;
 	t_inst	inst;
 
 	j = 0;
-	inst = get_nb_inst(*a, *b, j);
-	while (j < b->size)
+	inst = get_nb_inst(*stacks[STACK_A], *stacks[STACK_B], j);
+	while (j < stacks[STACK_B]->size)
 	{
-		inst_tmp = get_nb_inst(*a, *b, j);
+		inst_tmp = get_nb_inst(*stacks[STACK_A], *stacks[STACK_B], j);
 		if (inst_tmp.nb_inst < inst.nb_inst)
 		{
 			inst = inst_tmp;
 		}
 		j++;
 	}
-	if (push_using(a, b, inst) < 0)
+	if (push_using(stacks, inst) < 0)
 		return (-1);
 	return (0);
 }
@@ -115,29 +115,29 @@ static void	calculate_nb_inst(t_inst *ptr_inst)
 	}
 }
 
-static int	push_using(t_stack *a, t_stack *b, t_inst inst)
+static int	push_using(t_stack **stacks, t_inst inst)
 {
 	if (inst.type == 1)
 	{
-		if (push_using_ra_rb(a, b, inst) < 0)
+		if (push_using_ra_rb(stacks, inst) < 0)
 			return (-1);
 	}
 	else if (inst.type == 2)
 	{
-		if (push_using_rra_rrb(a, b, inst) < 0)
+		if (push_using_rra_rrb(stacks, inst) < 0)
 			return (-1);
 	}
 	else if (inst.type == 3)
 	{
-		if (push_using_rra_rb(a, b, inst) < 0)
+		if (push_using_rra_rb(stacks, inst) < 0)
 			return (-1);
 	}
 	else if (inst.type == 4)
 	{
-		if (push_using_ra_rrb(a, b, inst) < 0)
+		if (push_using_ra_rrb(stacks, inst) < 0)
 			return (-1);
 	}
-	if (inst_pa(a, b, DISPLAY) < 0)
+	if (inst_pa(stacks, DISPLAY) < 0)
 		return (-1);
 	return (0);
 }
