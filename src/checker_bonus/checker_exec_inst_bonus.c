@@ -33,6 +33,9 @@ int	exec_inst(t_stack **stacks, t_stack inst)
 	i = 0;
 	while (i < inst.size)
 	{
+		if (!(0 <= *((int *)inst.head->content)
+				&& *((int*)inst.head->content) <= 11))
+			return (1);
 		f[*((int *)inst.head->content)](stacks, NO_DISPLAY);
 		i++;
 		inst.head = inst.head->next;

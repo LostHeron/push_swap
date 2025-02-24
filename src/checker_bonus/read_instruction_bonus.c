@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:47:39 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 16:00:56 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:31:08 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #include "standard.h"
 #include "io.h"
 #include "checker_bonus.h"
-
-#define MALLOC_FAIL	-3
-#define INVALID_INST -2
+#include "push_swap.h"
 
 static t_node	*create_node(char *line, int *p_err_code);
 static void		free_line_p_inst_code(char *line, int *p_inst_code);

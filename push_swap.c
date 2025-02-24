@@ -6,19 +6,18 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:49:25 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 13:42:08 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:01:13 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "freeing.h"
 #include "instruction.h"
 #include "lists_double_circular.h"
-#include "printing.h"
 #include "parsing.h"
+#include "printing.h"
 #include "sorting.h"
 #include <stdlib.h>
 
-static void	*my_free(void *content);
 static void	init_stacks(t_stack **stacks);
 
 int	main(int argc, char **argv)
@@ -26,25 +25,28 @@ int	main(int argc, char **argv)
 	t_stack	a;
 	t_stack	b;
 	t_stack	*stacks[2];
+	int		ret;
 
+	if (argc <= 1)
+		return (0);
 	stacks[STACK_A] = &a;
 	stacks[STACK_B] = &b;
 	init_stacks(stacks);
-	if (argc <= 1)
+	ret = parse_input(&a, argc - 1, argv + 1);
+	if (ret != 0)
 	{
-		return (0);
-	}
-	if (parse_input(&a, argc - 1, argv + 1) != 0)
-	{
-		ft_dc_stack_clear(&a, &my_free);
+		ft_dc_stack_clear(&a, &stack_clear_free_func);
 		print_error();
-		return (1);
+		return (ret);
 	}
 	if (check_sorted(a) == 0)
 		return (0);
-	cost_sort(stacks);
-	ft_dc_stack_clear(&a, &my_free);
-	ft_dc_stack_clear(&b, &my_free);
+	ret = cost_sort(stacks);
+	if (ret != 0)
+		print_error();
+	ft_dc_stack_clear(&a, &stack_clear_free_func);
+	ft_dc_stack_clear(&b, &stack_clear_free_func);
+	return (ret);
 }
 
 static void	init_stacks(t_stack **stacks)
@@ -55,11 +57,4 @@ static void	init_stacks(t_stack **stacks)
 	stacks[STACK_B]->head = NULL;
 	stacks[STACK_B]->name = "b";
 	stacks[STACK_B]->size = 0;
-}
-
-static void	*my_free(void *content)
-{
-	if (content != NULL)
-		free(content);
-	return (NULL);
 }

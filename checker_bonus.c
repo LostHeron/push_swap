@@ -6,14 +6,16 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:40:54 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 14:45:52 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:00:11 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "io.h"
+#include "freeing.h"
 #include "printing.h"
 #include "lists_double_circular.h"
 #include "parsing.h"
+#include "push_swap.h"
 #include "string.h"
 #include "sorting.h"
 #include "checker_bonus.h"
@@ -21,26 +23,29 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void		*my_free(void *content);
-static int		free_stacks(t_stack *ptr_a, t_stack *ptr_b, t_stack *ptr_inst);
-static void		init_stacks(t_stack **stacks);
-static int		check_push_swap(t_stack **stacks);
+static int	free_stacks(t_stack *ptr_a, t_stack *ptr_b, t_stack *ptr_inst);
+static void	init_stacks(t_stack **stacks);
+static int	check_push_swap(t_stack **stacks);
+static int	display_result(t_stack **stacks);
 
 int	main(int argc, char **argv)
 {
 	t_stack	a;
 	t_stack	b;
 	t_stack	*stacks[2];
+	int		ret;
 
 	stacks[STACK_A] = &a;
 	stacks[STACK_B] = &b;
 	init_stacks(stacks);
 	if (argc <= 1)
 		return (0);
-	if (parse_input(&a, argc - 1, argv + 1) != 0)
+	ret = parse_input(&a, argc - 1, argv + 1);
+	if (ret != 0)
 	{
 		print_error();
-		return (free_stacks(&a, &b, NULL));
+		free_stacks(&a, &b, NULL);
+		return (ret);
 	}
 	return (check_push_swap(stacks));
 }
@@ -49,29 +54,29 @@ static int	check_push_swap(t_stack **stacks)
 {
 	t_stack	inst_stack;
 	int		err_code;
+	int		ret;
 
 	inst_stack = read_instruction(&err_code);
 	if (err_code < 0)
 	{
 		print_error();
-		return (free_stacks(stacks[STACK_A], stacks[STACK_B], &inst_stack));
+		free_stacks(stacks[STACK_A], stacks[STACK_B], &inst_stack);
+		return (err_code);
 	}
-	if (exec_inst(stacks, inst_stack) < 0)
+	if (exec_inst(stacks, inst_stack) != 0)
 	{
 		print_error();
 		return (free_stacks(stacks[STACK_A], stacks[STACK_B], &inst_stack));
 	}
-	if (stacks[STACK_B]->size == 0)
+	ret = display_result(stacks);
+	free_stacks(stacks[STACK_A], stacks[STACK_B], &inst_stack);
+	if (ret != 0)
 	{
-		if (check_sorted(*stacks[STACK_A]) == 0)
-			ft_printf_fd(1, "OK\n");
-		else
-			ft_printf_fd(1, "KO\n");
+		print_error();
+		return (ret);
 	}
 	else
-		ft_printf_fd(1, "KO\n");
-	free_stacks(stacks[STACK_A], stacks[STACK_B], &inst_stack);
-	return (0);
+		return (0);
 }
 
 static void	init_stacks(t_stack **stacks)
@@ -84,20 +89,32 @@ static void	init_stacks(t_stack **stacks)
 	stacks[STACK_B]->size = 0;
 }
 
+static int	display_result(t_stack **stacks)
+{
+	if (stacks[STACK_B]->size == 0)
+	{
+		if (check_sorted(*stacks[STACK_A]) == 0)
+		{
+			if (ft_printf_fd(1, "OK\n") < 0)
+				return (WRITE_ERROR);
+		}
+		else
+			if (ft_printf_fd(1, "KO\n") < 0)
+				return (WRITE_ERROR);
+	}
+	else
+		if (ft_printf_fd(1, "KO\n") < 0)
+			return (WRITE_ERROR);
+	return (0);
+}
+
 static int	free_stacks(t_stack *ptr_a, t_stack *ptr_b, t_stack *ptr_inst)
 {
 	if (ptr_a != NULL)
-		ft_dc_stack_clear(ptr_a, &my_free);
+		ft_dc_stack_clear(ptr_a, &stack_clear_free_func);
 	if (ptr_b != NULL)
-		ft_dc_stack_clear(ptr_b, &my_free);
+		ft_dc_stack_clear(ptr_b, &stack_clear_free_func);
 	if (ptr_inst != NULL)
-		ft_dc_stack_clear(ptr_inst, &my_free);
+		ft_dc_stack_clear(ptr_inst, &stack_clear_free_func);
 	return (1);
-}
-
-static void	*my_free(void *content)
-{
-	if (content != NULL)
-		free(content);
-	return (NULL);
 }

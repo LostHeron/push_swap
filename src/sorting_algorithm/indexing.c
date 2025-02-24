@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:09:43 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 11:33:49 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:34:22 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	indexing(t_stack a)
 
 	node_array = ft_malloc(a.size * sizeof(t_node *));
 	if (node_array == NULL)
-		return (-3);
+		return (MALLOC_FAIL);
 	i = 0;
 	while (i < a.size)
 	{

@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:43:48 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 11:33:44 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:35:45 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ int	push_all_to_b(t_stack **stacks)
 
 	middle = stacks[STACK_A]->size / 2;
 	if (indexing(*stacks[STACK_A]) < 0)
-		return (-3);
+		return (MALLOC_FAIL);
 	while (stacks[STACK_A]->size > 3)
 	{
 		if (((t_pair *)stacks[STACK_A]->head->content)->index > middle)
 		{
 			if (inst_pb(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 		}
 		else
 		{
 			if (inst_pb(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 			if (inst_rb(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 		}
 	}
 	return (0);
@@ -105,7 +105,7 @@ int	rotate_to_min(t_stack **stacks)
 		tmp = tmp->next;
 	}
 	if (chose_side(stacks, nb_rotate) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	return (0);
 }
 
@@ -118,11 +118,11 @@ static int	chose_side(t_stack **stacks, int nb_rotate)
 	{
 		while (++i < stacks[STACK_A]->size - nb_rotate)
 			if (inst_rra(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 	}
 	else
 		while (++i < nb_rotate)
 			if (inst_ra(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 	return (0);
 }

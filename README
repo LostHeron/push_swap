@@ -1,3 +1,6 @@
 Error code of the program :
--1 -> write faile
--3 -> malloc fail allocation
+-1 -> write error
+-2 -> invalid instruction
+-3 -> malloc allocation fail
+-4 -> wrong input
+-5 -> duplicate value

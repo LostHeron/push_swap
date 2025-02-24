@@ -6,7 +6,7 @@
 /*   By: jweber <jweber@student.42Lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:44:46 by jweber            #+#    #+#             */
-/*   Updated: 2025/02/21 11:29:00 by jweber           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:40:46 by jweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ static int		push_using(t_stack **stacks, t_inst inst);
 
 int	cost_sort(t_stack **stacks)
 {
-	int	check_val;
+	int	ret;
 
-	check_val = push_all_to_b(stacks);
-	if (check_val < 0)
-		return (check_val);
+	ret = push_all_to_b(stacks);
+	if (ret < 0)
+		return (ret);
 	if (sort_three(stacks) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	while (stacks[STACK_B]->size > 0)
 	{
 		if (chose_push(stacks) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	}
 	if (rotate_to_min(stacks) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	return (0);
 }
 
@@ -60,7 +60,7 @@ static int	chose_push(t_stack **stacks)
 		j++;
 	}
 	if (push_using(stacks, inst) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	return (0);
 }
 
@@ -120,24 +120,24 @@ static int	push_using(t_stack **stacks, t_inst inst)
 	if (inst.type == 1)
 	{
 		if (push_using_ra_rb(stacks, inst) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	}
 	else if (inst.type == 2)
 	{
 		if (push_using_rra_rrb(stacks, inst) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	}
 	else if (inst.type == 3)
 	{
 		if (push_using_rra_rb(stacks, inst) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	}
 	else if (inst.type == 4)
 	{
 		if (push_using_ra_rrb(stacks, inst) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	}
 	if (inst_pa(stacks, DISPLAY) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	return (0);
 }

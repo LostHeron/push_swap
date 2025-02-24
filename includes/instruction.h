@@ -20,7 +20,7 @@
 
 typedef enum e_stack_name
 {
-	STACK_A,
+	STACK_A = 0,
 	STACK_B,
 }	t_stack_name;
 
