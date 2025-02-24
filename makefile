@@ -51,7 +51,7 @@ CHECKER_FILES := checker_exec_inst_bonus.c \
 				 checker_check_inst_bonus.c \
 				 read_instruction_bonus.c \
 
-FREE_DIR := freeing/
+FREE_DIR := src/freeing/
 FREE_FILES := stack_clear_free_func.c \
 
 FILES_INCLUDES := includes/
@@ -60,6 +60,7 @@ C_FILES := $(NAME).c \
 		   $(addprefix $(PARSING_DIR), $(PARSING_FILES)) \
 		   $(addprefix $(INSTRUCTION_DIR), $(INSTRUCTION_FILES)) \
 		   $(addprefix $(SORTING_DIR), $(SORTING_FILES)) \
+		   $(addprefix $(FREE_DIR), $(FREE_FILES)) \
 
 OBJ_DIR := .obj/
 OBJ_FILES := $(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
@@ -72,6 +73,7 @@ C_FILES_BONUS := checker_bonus.c \
 		   		 $(addprefix $(PARSING_DIR), $(PARSING_FILES)) \
 		   		 $(addprefix $(INSTRUCTION_DIR), $(INSTRUCTION_FILES)) \
 		   		 $(addprefix $(SORTING_DIR), $(SORTING_FILES)) \
+				 $(addprefix $(FREE_DIR), $(FREE_FILES)) \
 				 $(addprefix $(CHECKER_DIR), $(CHECKER_FILES)) \
 
 OBJ_DIR_BONUS := $(OBJ_DIR)
@@ -97,7 +99,7 @@ $(NAME_BONUS): $(OBJ_FILES_BONUS) $(LIBFT)
 
 -include $(DEP_FILES)
 
-$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)$(PRINT_DIR) $(OBJ_DIR)$(PARSING_DIR) $(OBJ_DIR)$(INSTRUCTION_DIR) $(OBJ_DIR)$(SORTING_DIR) $(OBJ_DIR)$(CHECKER_DIR)
+$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)$(PRINT_DIR) $(OBJ_DIR)$(PARSING_DIR) $(OBJ_DIR)$(INSTRUCTION_DIR) $(OBJ_DIR)$(SORTING_DIR) $(OBJ_DIR)$(FREE_DIR) $(OBJ_DIR)$(CHECKER_DIR)
 	$(CC) $(CFLAGS) -MMD -MP -c -I $(FILES_INCLUDES) -I $(LIBFT_INCLUDES) $< -o $@
 
 
@@ -111,6 +113,9 @@ $(OBJ_DIR)$(PRINT_DIR):
 	mkdir -p $@
 
 $(OBJ_DIR)$(SORTING_DIR):
+	mkdir -p $@
+
+$(OBJ_DIR)$(FREE_DIR):
 	mkdir -p $@
 
 $(OBJ_DIR)$(CHECKER_DIR):
