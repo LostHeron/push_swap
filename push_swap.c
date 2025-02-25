@@ -19,6 +19,7 @@
 #include <stdlib.h>
 
 static void	init_stacks(t_stack **stacks);
+static int	case_stack_sorted(t_stack **stacks);
 
 int	main(int argc, char **argv)
 {
@@ -40,13 +41,20 @@ int	main(int argc, char **argv)
 		return (ret);
 	}
 	if (check_sorted(a) == 0)
-		return (0);
+		return (case_stack_sorted(stacks));
 	ret = cost_sort(stacks);
 	if (ret != 0)
 		print_error();
 	ft_dc_stack_clear(&a, &stack_clear_free_func);
 	ft_dc_stack_clear(&b, &stack_clear_free_func);
 	return (ret);
+}
+
+static int	case_stack_sorted(t_stack **stacks)
+{
+	ft_dc_stack_clear(stacks[STACK_A], &stack_clear_free_func);
+	ft_dc_stack_clear(stacks[STACK_B], &stack_clear_free_func);
+	return (0);
 }
 
 static void	init_stacks(t_stack **stacks)
