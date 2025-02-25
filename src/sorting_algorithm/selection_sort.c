@@ -32,16 +32,16 @@ int	selection_sort(t_stack **stacks)
 		while (j < min_index)
 		{
 			if (inst_ra(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 			j++;
 		}
 		if (inst_pb(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	}
 	i = -1;
 	while (++i < nb_elems)
 		if (inst_pa(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	return (0);
 }
 

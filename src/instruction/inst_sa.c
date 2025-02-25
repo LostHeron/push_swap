@@ -13,6 +13,7 @@
 #include "lists_double_circular.h"
 #include "io.h"
 #include "instruction.h"
+#include "push_swap.h"
 
 int	inst_sa(t_stack **stacks, int display)
 {
@@ -36,6 +37,6 @@ int	inst_sa(t_stack **stacks, int display)
 	old_head->next = tmp_next_next;
 	if (display == DISPLAY)
 		if (ft_printf_fd(1, "sa\n") < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	return (0);
 }

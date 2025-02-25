@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 #include "string.h"
 #include "instruction.h"
 
@@ -38,5 +39,5 @@ int	check_inst(char *inst_i)
 	else if (ft_strcmp(inst_i, "rrr\n") == 0)
 		return (INST_RRR);
 	else
-		return (-1);
+		return (INVALID_INST);
 }

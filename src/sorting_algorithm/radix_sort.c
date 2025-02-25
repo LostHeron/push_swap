@@ -24,13 +24,13 @@ int	radix_sort(t_stack **stacks)
 	int	nb_digits;
 
 	if (indexing(*stacks[STACK_A]) < 0)
-		return (-3);
+		return (MALLOC_FAIL);
 	nb_digits = get_nb_digits(*stacks[STACK_A]);
 	i = 0;
 	while (i < nb_digits)
 	{
 		if (push_zeros(stacks, i) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 		i++;
 	}
 	return (0);
@@ -50,18 +50,18 @@ static int	push_zeros(t_stack **stacks, int i)
 		if ((((t_pair *)stacks[STACK_A]->head->content)->index & (1 << i)) == 0)
 		{
 			if (inst_pb(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 			nb_pushed++;
 		}
 		else
 			if (inst_ra(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 		j++;
 	}
 	j = -1;
 	while (++j < nb_pushed)
 		if (inst_pa(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	return (0);
 }
 

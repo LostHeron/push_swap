@@ -30,11 +30,11 @@ int	bubble_sort(t_stack **stacks)
 		while (j < stacks[STACK_A]->size - 1)
 		{
 			if (chose_swap(stacks, &rotation) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 			j++;
 		}
 		if (inst_ra(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 		if (rotation == 0)
 			break ;
 		i++;
@@ -52,9 +52,9 @@ static int	chose_swap(t_stack **stacks, int *rotation)
 	{
 		*rotation = 1;
 		if (inst_sa(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	}
 	if (inst_ra(stacks, DISPLAY) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	return (0);
 }

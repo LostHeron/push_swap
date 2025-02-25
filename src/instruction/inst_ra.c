@@ -12,6 +12,7 @@
 
 #include "lists_double_circular.h"
 #include "io.h"
+#include "push_swap.h"
 #include "instruction.h"
 #include <stdlib.h>
 
@@ -22,6 +23,6 @@ int	inst_ra(t_stack **stacks, int display)
 	stacks[STACK_A]->head = stacks[STACK_A]->head->next;
 	if (display == DISPLAY)
 		if (ft_printf_fd(1, "ra\n") < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	return (0);
 }

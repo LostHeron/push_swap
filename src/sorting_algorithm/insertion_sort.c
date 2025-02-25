@@ -27,12 +27,12 @@ int	insertion_sort(t_stack **stacks)
 		if (i != 0)
 		{
 			if (rr_while_possible(stacks, &i) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 		}
 		else
 		{
 			if (inst_ra(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 			i++;
 		}
 	}
@@ -45,13 +45,13 @@ static int	rr_while_possible(t_stack **stacks, int *i)
 		< ((t_pair *)stacks[STACK_A]->head->prev->content)->value)
 	{
 		if (rr_and_s(stacks) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 		(*i)--;
 	}
 	else
 	{
 		if (inst_ra(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 		(*i)++;
 	}
 	return (0);
@@ -60,8 +60,8 @@ static int	rr_while_possible(t_stack **stacks, int *i)
 static int	rr_and_s(t_stack **stacks)
 {
 	if (inst_rra(stacks, DISPLAY) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	if (inst_sa(stacks, DISPLAY) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	return (0);
 }

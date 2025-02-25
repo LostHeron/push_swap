@@ -27,7 +27,7 @@ int	radix_sort_ternary(t_stack **stacks)
 	int	nb_digits;
 
 	if (indexing(*stacks[0]) < 0)
-		return (-3);
+		return (MALLOC_FAIL);
 	nb_digits = get_nb_digits(*stacks[0]);
 	i = 0;
 	while (i < nb_digits)
@@ -55,14 +55,14 @@ static int	push_zeros_ones(t_stack **stacks, int i)
 	while (++j < nb_pushed_down)
 	{
 		if (inst_rrb(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 		if (inst_pa(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	}
 	j = -1;
 	while (++j < nb_pushed_up)
 		if (inst_pa(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	return (0);
 }
 
@@ -76,20 +76,20 @@ static int	chose_case(t_stack **stacks, int i,
 	if (tmp_index % 3 == 0)
 	{
 		if (inst_pb(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 		(*nb_push_up)++;
 	}
 	else if (tmp_index % 3 == 1)
 	{
 		if (inst_pb(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 		if (inst_rb(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 		(*nb_push_down)++;
 	}
 	else if (tmp_index % 3 == 2)
 		if (inst_ra(stacks, DISPLAY) < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	return (0);
 }
 

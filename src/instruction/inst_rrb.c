@@ -13,6 +13,7 @@
 #include "lists_double_circular.h"
 #include "io.h"
 #include "instruction.h"
+#include "push_swap.h"
 #include <stdlib.h>
 
 int	inst_rrb(t_stack **stacks, int display)
@@ -22,6 +23,6 @@ int	inst_rrb(t_stack **stacks, int display)
 	stacks[STACK_B]->head = stacks[STACK_B]->head->prev;
 	if (display == DISPLAY)
 		if (ft_printf_fd(1, "rrb\n") < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	return (0);
 }

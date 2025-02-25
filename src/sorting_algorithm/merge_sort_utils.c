@@ -31,14 +31,14 @@ int	case_size_two(t_stack **stacks, int order)
 		if (((t_pair *)stacks[0]->head->content)->value
 			> ((t_pair *)stacks[0]->head->next->content)->value)
 			if (inst_sa(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 	}
 	else
 	{
 		if (((t_pair *)stacks[0]->head->content)->value
 			< ((t_pair *)stacks[0]->head->next->content)->value)
 			if (inst_sa(stacks, DISPLAY) < 0)
-				return (-1);
+				return (WRITE_ERROR);
 	}
 	return (0);
 }
@@ -46,9 +46,9 @@ int	case_size_two(t_stack **stacks, int order)
 int	pa_at_end(t_stack **stacks)
 {
 	if (inst_rrb(stacks, DISPLAY) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	if (inst_pa(stacks, DISPLAY) < 0)
-		return (-1);
+		return (WRITE_ERROR);
 	return (0);
 }
 

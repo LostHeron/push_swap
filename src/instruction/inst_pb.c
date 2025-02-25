@@ -13,6 +13,7 @@
 #include "io.h"
 #include "lists_double_circular.h"
 #include "instruction.h"
+#include "push_swap.h"
 #include <stdlib.h>
 
 int	inst_pb(t_stack **stacks, int display)
@@ -25,6 +26,6 @@ int	inst_pb(t_stack **stacks, int display)
 	ft_dc_stack_add(stacks[STACK_B], tmp);
 	if (display == DISPLAY)
 		if (ft_printf_fd(1, "pb\n") < 0)
-			return (-1);
+			return (WRITE_ERROR);
 	return (0);
 }
