@@ -15,15 +15,31 @@
 #include "instruction.h"
 #include "push_swap.h"
 
+static void	case_size_greater_three(t_stack **stacks);
+
 int	inst_sa(t_stack **stacks, int display)
+{
+	if (stacks[STACK_A]->size <= 1)
+		return (0);
+	else if (stacks[STACK_A]->size == 2)
+		inst_ra(stacks, NO_DISPLAY);
+	else
+	{
+		case_size_greater_three(stacks);
+	}
+	if (display == DISPLAY)
+		if (ft_printf_fd(1, "sa\n") < 0)
+			return (WRITE_ERROR);
+	return (0);
+}
+
+static void	case_size_greater_three(t_stack **stacks)
 {
 	t_node	*tmp_prev;
 	t_node	*tmp_next_next;
 	t_node	*old_head;
 	t_node	*old_next;
 
-	if (stacks[STACK_A]->size == 0)
-		return (0);
 	tmp_prev = stacks[STACK_A]->head->prev;
 	tmp_next_next = stacks[STACK_A]->head->next->next;
 	old_head = stacks[STACK_A]->head;
@@ -35,8 +51,4 @@ int	inst_sa(t_stack **stacks, int display)
 	old_next->prev = tmp_prev;
 	old_head->prev = old_next;
 	old_head->next = tmp_next_next;
-	if (display == DISPLAY)
-		if (ft_printf_fd(1, "sa\n") < 0)
-			return (WRITE_ERROR);
-	return (0);
 }

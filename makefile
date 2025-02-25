@@ -81,7 +81,7 @@ OBJ_FILES_BONUS := $(addprefix $(OBJ_DIR_BONUS), $(C_FILES_BONUS:.c=.o))
 
 .PHONY: all clean fclean re bonus exec
 
-all: makelibft $(NAME)
+all: git makelibft $(NAME)
 
 makelibft:
 	$(MAKE) -C src/libft/
