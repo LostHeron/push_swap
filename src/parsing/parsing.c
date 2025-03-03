@@ -19,6 +19,7 @@
 static int	add_values_stack(t_stack *pa, char **values);
 static int	check_duplicate(t_stack *pa);
 static void	*free_all(char **values);
+static int	free_and_return(char **values, int ret);
 
 int	parse_input(t_stack *pa, int nb_args, char **args)
 {
@@ -33,7 +34,7 @@ int	parse_input(t_stack *pa, int nb_args, char **args)
 		if (values == NULL)
 			return (MALLOC_FAIL);
 		if (values[0] == NULL)
-			return (WRONG_INPUT);
+			return (free_and_return(values, WRONG_INPUT));
 		ret = add_values_stack(pa, values);
 		if (ret != 0)
 		{
@@ -117,4 +118,10 @@ static void	*free_all(char **values)
 	}
 	free(values);
 	return (NULL);
+}
+
+static int	free_and_return(char **values, int ret)
+{
+	free_all(values);
+	return (ret);
 }
