@@ -15,3 +15,4 @@ script_test_malloc.sh
 *.supp
 *.sh
 *.py
+*gdb*
