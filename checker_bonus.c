@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "io.h"
+#include "ft_io.h"
+#include "ft_lists_double_circular.h"
 #include "freeing.h"
 #include "printing.h"
-#include "lists_double_circular.h"
 #include "parsing.h"
 #include "push_swap.h"
-#include "string.h"
 #include "sorting.h"
 #include "checker_bonus.h"
 #include "instruction.h"

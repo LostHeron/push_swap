@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lists_double_circular.h"
+#include "ft_lists_double_circular.h"
 #include "parsing.h"
-#include "standard.h"
+#include "ft_standard.h"
 #include "push_swap.h"
 #define WHITE_SPACES " \t\n\v\f\r"
 

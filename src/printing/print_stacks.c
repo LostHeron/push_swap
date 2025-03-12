@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lists_double_circular.h"
+#include "ft_lists_double_circular.h"
 #include "push_swap.h"
-#include "io.h"
+#include "ft_io.h"
 
 static void	in_if(t_stack a, t_stack b);
 static void	in_else(t_stack a, t_stack b);

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lists_double_circular.h"
-#include "io.h"
+#include "ft_lists_double_circular.h"
+#include "ft_io.h"
 #include "instruction.h"
 #include "push_swap.h"
 #include <stdlib.h>

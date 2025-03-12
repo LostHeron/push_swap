@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lists_double_circular.h"
+#include "ft_lists_double_circular.h"
 #include "instruction.h"
-#include "math.h"
+#include "ft_math.h"
 #include "cost_sort.h"
 #include "push_swap.h"
 

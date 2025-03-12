@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "string.h"
+#include "ft_string.h"
 #include "instruction.h"
 
 int	check_inst(char *inst_i)

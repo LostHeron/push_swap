@@ -12,7 +12,7 @@
 
 #include "merge_sort.h"
 #include "instruction.h"
-#include "lists_double_circular.h"
+#include "ft_lists_double_circular.h"
 #include "push_swap.h"
 
 static int	chose_push(t_stack **stacks, int *p_middle, int order);

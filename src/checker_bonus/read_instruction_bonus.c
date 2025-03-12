@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lists_double_circular.h"
-#include "standard.h"
-#include "io.h"
+#include "ft_lists_double_circular.h"
+#include "ft_standard.h"
+#include "ft_io.h"
 #include "checker_bonus.h"
 #include "push_swap.h"
 

@@ -13,7 +13,7 @@
 #include "cost_sort.h"
 #include "push_swap.h"
 #include "instruction.h"
-#include "math.h"
+#include "ft_math.h"
 #include "sorting.h"
 
 static int	chose_side(t_stack **stacks, int nb_rotate);

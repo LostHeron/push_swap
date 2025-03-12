@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lists_double_circular.h"
+#include "ft_lists_double_circular.h"
+#include "ft_standard.h"
 #include "push_swap.h"
-#include "standard.h"
 #include <stdlib.h>
 
 static void	sort_array(t_node **node_array, int nb_elems);

@@ -13,7 +13,7 @@
 #ifndef SORTING_H
 # define SORTING_H
 
-# include "lists_double_circular.h"
+# include "ft_lists_double_circular.h"
 
 int	check_sorted(t_stack a);
 int	indexing(t_stack a);

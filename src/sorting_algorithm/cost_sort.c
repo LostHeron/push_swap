@@ -13,8 +13,8 @@
 #include "instruction.h"
 #include "sorting.h"
 #include "cost_sort.h"
-#include "lists_double_circular.h"
-#include "math.h"
+#include "ft_lists_double_circular.h"
+#include "ft_math.h"
 #include "push_swap.h"
 #include "sorting.h"
 

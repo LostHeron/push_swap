@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lists_double_circular.h"
+#include "ft_lists_double_circular.h"
 #include "push_swap.h"
 #include "instruction.h"
 #include "sorting.h"
-#include "math.h"
+#include "ft_math.h"
 
 static int	chose_case(t_stack **stacks, int i,
 				int *nb_push_up, int *nb_push_down);

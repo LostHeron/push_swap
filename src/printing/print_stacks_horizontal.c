@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lists_double_circular.h"
+#include "ft_lists_double_circular.h"
 #include "push_swap.h"
-#include "io.h"
+#include "ft_io.h"
 
 void	print_stacks_horizontal(t_stack a, t_stack b)
 {
